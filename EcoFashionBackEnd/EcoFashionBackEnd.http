@@ -1,0 +1,6 @@
+@EcoFashionBackEnd_HostAddress = http://localhost:5148
+
+GET {{EcoFashionBackEnd_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
