@@ -13,7 +13,9 @@ public class Program
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddInfrastructure(builder.Configuration);
-
+                var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+                builder.WebHost.UseUrls($"http://*:{port}");
+                builder.Services.AddHealthChecks();
             // Add services to the container.
             builder.Services.AddSwaggerGen(option => 
             {
@@ -62,7 +64,7 @@ public class Program
             });
 
             var app = builder.Build();
-
+                app.UseHealthChecks("/health");
             // Database migration and seeding
             try
             {
