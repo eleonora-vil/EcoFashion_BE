@@ -45,7 +45,7 @@ namespace EcoFashionBackEnd.Entities
         public DateTime LastUpdatedAt { get; set;}
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
         public virtual ICollection<PaymentTransaction> PaymentTransactions { get; set; } = new List<PaymentTransaction>();
-
+        public virtual Wallet Wallet { get; set; }
     }
 
 

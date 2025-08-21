@@ -20,6 +20,6 @@ namespace EcoFashionBackEnd.Entities
         public int QuantityAvailable { get; set; }
 
         public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
-        public virtual ICollection<ProductInventoryTransaction> Transactions { get; set; } = new List<ProductInventoryTransaction>();
+        public virtual ICollection<ProductInventoryTransaction> ProductInventoryTransaction { get; set; } = new List<ProductInventoryTransaction>();
     }
 }

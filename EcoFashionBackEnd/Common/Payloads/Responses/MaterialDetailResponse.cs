@@ -39,5 +39,6 @@ namespace EcoFashionBackEnd.Common.Payloads.Responses
         public decimal? SustainabilityScore { get; set; }
         public string? SustainabilityLevel { get; set; }
         public string? SustainabilityColor { get; set; }
+        public List<CriterionCalculationDetail> CriterionDetails { get; set; } = new();
     }
 }

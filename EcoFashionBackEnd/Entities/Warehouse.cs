@@ -32,5 +32,6 @@ namespace EcoFashionBackEnd.Entities
  
         // Navigation tới ProductInventories (nếu dùng cho kho sản phẩm)
         public ICollection<ProductInventory> ProductInventories { get; set; } = new List<ProductInventory>();
+        public virtual ICollection<DesignerMaterialInventory> MaterialInventories { get; set; } = new List<DesignerMaterialInventory>();
     }
 }

@@ -56,7 +56,8 @@ namespace EcoFashionBackEnd.Mapper
             CreateMap<MaterialDto, MaterialDto>();
             CreateMap<SustainabilityCriterionDto, SustainabilityCriterionDto>();
             CreateMap<DesignerPublicDto, DesignerPublicDto>();
-
+            CreateMap<ItemType, ItemTypeDto>(); 
+            CreateMap<ItemTypeDto, ItemType>();
             // ---------- Application ----------
             CreateMap<Application, ApplicationModel>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));

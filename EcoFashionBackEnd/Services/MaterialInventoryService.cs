@@ -63,7 +63,13 @@ namespace EcoFashionBackEnd.Services
 
             if (materialId.HasValue) query = query.Where(t => t.MaterialId == materialId.Value);
             if (warehouseId.HasValue) query = query.Where(t => t.WarehouseId == warehouseId.Value);
-            if (!string.IsNullOrWhiteSpace(type)) query = query.Where(t => t.TransactionType == type);
+            if (!string.IsNullOrWhiteSpace(type)) 
+            {
+                if (Enum.TryParse<MaterialTransactionType>(type, true, out var transactionType))
+                {
+                    query = query.Where(t => t.TransactionType == transactionType);
+                }
+            }
             if (from.HasValue) query = query.Where(t => t.CreatedAt >= from.Value);
             if (to.HasValue) query = query.Where(t => t.CreatedAt <= to.Value);
             if (supplierId.HasValue) query = query.Where(t => t.Warehouse!.SupplierId == supplierId);
@@ -81,7 +87,7 @@ namespace EcoFashionBackEnd.Services
                 TransactionId = t.TransactionId,
                 MaterialId = t.MaterialId,
                 WarehouseId = t.WarehouseId,
-                TransactionType = t.TransactionType,
+                TransactionType = t.TransactionType.ToString(),
                 QuantityChange = t.QuantityChange,
                 BeforeQty = t.BeforeQty,
                 AfterQty = t.AfterQty,
@@ -130,7 +136,7 @@ namespace EcoFashionBackEnd.Services
             {
                 MaterialId = materialId,
                 WarehouseId = warehouseId,
-                TransactionType = "SupplierReceipt",
+                TransactionType = MaterialTransactionType.SupplierReceipt,
                 QuantityChange = quantity,
                 BeforeQty = before,
                 AfterQty = after,
@@ -203,7 +209,7 @@ namespace EcoFashionBackEnd.Services
             {
                 MaterialId = materialId,
                 WarehouseId = warehouseId,
-                TransactionType = "OrderSale", // Phân biệt với "SupplierReceipt"
+                TransactionType = MaterialTransactionType.CustomerSale, // Sử dụng enum thay vì "OrderSale"
                 QuantityChange = -quantity, // Số âm cho deduction
                 BeforeQty = before,
                 AfterQty = after,
@@ -234,6 +240,154 @@ namespace EcoFashionBackEnd.Services
 
             await tx.CommitAsync();
             return true;
+        }
+        
+        /// <summary>
+        /// Phương thức tổng quát để thực hiện transaction inventory với logging đầy đủ
+        /// </summary>
+        /// <param name="materialId">ID của material</param>
+        /// <param name="warehouseId">ID của warehouse</param>
+        /// <param name="transactionType">Loại transaction</param>
+        /// <param name="quantityChange">Thay đổi số lượng (+ hoặc -)</param>
+        /// <param name="unit">Đơn vị (mét, kg, etc.)</param>
+        /// <param name="note">Ghi chú</param>
+        /// <param name="referenceType">Loại tham chiếu</param>
+        /// <param name="referenceId">ID tham chiếu</param>
+        /// <param name="userId">ID user thực hiện</param>
+        /// <returns>True nếu thành công</returns>
+        public async Task<bool> CreateTransactionAsync(
+            int materialId, 
+            int warehouseId, 
+            MaterialTransactionType transactionType,
+            decimal quantityChange, 
+            string? unit = "mét", 
+            string? note = null, 
+            string? referenceType = null, 
+            string? referenceId = null, 
+            int? userId = null)
+        {
+            if (quantityChange == 0) 
+                throw new ArgumentException("Quantity change cannot be zero");
+
+            using var tx = await _dbContext.Database.BeginTransactionAsync();
+
+            var stock = await _dbContext.MaterialStocks
+                .FirstOrDefaultAsync(s => s.MaterialId == materialId && s.WarehouseId == warehouseId);
+            
+            if (stock == null)
+            {
+                throw new InvalidOperationException($"No stock found for MaterialId {materialId} in WarehouseId {warehouseId}");
+            }
+
+            var before = stock.QuantityOnHand;
+            var after = before + quantityChange; // quantityChange có thể âm hoặc dương
+
+            // Cảnh báo nếu inventory âm (cho phép overdraft)
+            if (after < 0)
+            {
+                Console.WriteLine($"WARNING: Stock going negative for MaterialId {materialId}. Before: {before}, After: {after}");
+            }
+
+            // Tạo transaction log với thông tin chi tiết
+            var transaction = new MaterialStockTransaction
+            {
+                MaterialId = materialId,
+                WarehouseId = warehouseId,
+                TransactionType = transactionType,
+                QuantityChange = quantityChange,
+                BeforeQty = before,
+                AfterQty = after,
+                Unit = unit,
+                ReferenceType = referenceType,
+                ReferenceId = referenceId,
+                Note = note ?? $"{transactionType.GetDescription()} - {Math.Abs(quantityChange)} {unit}",
+                CreatedByUserId = userId,
+                CreatedAt = DateTime.UtcNow
+            };
+            _dbContext.MaterialStockTransactions.Add(transaction);
+
+            // Cập nhật stock
+            stock.QuantityOnHand = after;
+            stock.LastUpdated = DateTime.UtcNow;
+            await _dbContext.SaveChangesAsync();
+
+            // Cập nhật Material.QuantityAvailable
+            await UpdateMaterialQuantityAvailableAsync(materialId);
+
+            await tx.CommitAsync();
+            
+            Console.WriteLine($"✅ {transactionType.GetDescription()}: MaterialId {materialId}, Change: {quantityChange}, Before: {before}, After: {after}");
+            return true;
+        }
+        
+        /// <summary>
+        /// Cập nhật Material.QuantityAvailable từ tổng của tất cả warehouses
+        /// </summary>
+        private async Task UpdateMaterialQuantityAvailableAsync(int materialId)
+        {
+            var total = await _dbContext.MaterialStocks
+                .Where(s => s.MaterialId == materialId)
+                .SumAsync(s => s.QuantityOnHand);
+                
+            var material = await _dbContext.Materials.FindAsync(materialId);
+            if (material != null)
+            {
+                material.QuantityAvailable = (int)Math.Max(0, total); // Không để âm ở Material level
+                material.LastUpdated = DateTime.UtcNow;
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+        
+        /// <summary>
+        /// Xử lý trả hàng từ customer (tăng inventory)
+        /// </summary>
+        public async Task<bool> ProcessCustomerReturnAsync(
+            int materialId, 
+            int warehouseId, 
+            decimal returnQuantity, 
+            string orderId, 
+            string? returnReason = null, 
+            int? userId = null)
+        {
+            var note = $"Trả hàng từ đơn #{orderId}" + 
+                      (string.IsNullOrEmpty(returnReason) ? "" : $" - Lý do: {returnReason}");
+                      
+            return await CreateTransactionAsync(
+                materialId: materialId,
+                warehouseId: warehouseId,
+                transactionType: MaterialTransactionType.CustomerReturn,
+                quantityChange: returnQuantity, // Số dương - tăng inventory
+                unit: "mét",
+                note: note,
+                referenceType: "CustomerReturn", 
+                referenceId: orderId,
+                userId: userId
+            );
+        }
+        
+        /// <summary>
+        /// Xử lý điều chỉnh thủ công (có thể tăng hoặc giảm)
+        /// </summary>
+        public async Task<bool> ProcessManualAdjustmentAsync(
+            int materialId, 
+            int warehouseId, 
+            decimal adjustmentQuantity, 
+            string reason, 
+            int userId)
+        {
+            var note = $"Điều chỉnh thủ công - {reason}";
+                      
+            return await CreateTransactionAsync(
+                materialId: materialId,
+                warehouseId: warehouseId,
+                transactionType: MaterialTransactionType.ManualAdjustment,
+                quantityChange: adjustmentQuantity, // Có thể + hoặc -
+                unit: "mét",
+                note: note,
+                referenceType: "ManualAdjustment", 
+                referenceId: $"ADJ-{DateTime.UtcNow:yyyyMMddHHmmss}",
+                userId: userId
+            );
         }
     }
 }

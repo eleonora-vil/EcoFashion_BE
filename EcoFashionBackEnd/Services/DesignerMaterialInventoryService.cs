@@ -31,7 +31,6 @@ namespace EcoFashionBackEnd.Services
         public async Task<IEnumerable<DesignerMaterialInventoryModel>> GetAllDesignerMaterialInventoriesAsync()
         {
             var inventories = await _dbContext.DesignerMaterialInventories
-                .Include(dmi => dmi.Designer)
                 .Include(dmi => dmi.Material)
                 .ToListAsync();
             return _mapper.Map<List<DesignerMaterialInventoryModel>>(inventories);
@@ -40,7 +39,6 @@ namespace EcoFashionBackEnd.Services
         public async Task<DesignerMaterialInventoryModel> GetDesignerMaterialInventoryByIdAsync(int id)
         {
             var inventory = await _dbContext.DesignerMaterialInventories
-                .Include(dmi => dmi.Designer)
                 .Include(dmi => dmi.Material)
                 .FirstOrDefaultAsync(dmi => dmi.InventoryId == id);
             return _mapper.Map<DesignerMaterialInventoryModel>(inventory);
@@ -55,13 +53,11 @@ namespace EcoFashionBackEnd.Services
             inventory.Status = inventory.Quantity != 0
                 ? "in_stock"
                 : "out_of_stock";
-            inventory.DesignerId = designer.DesignerId;
             inventory.LastBuyDate = DateTime.UtcNow;
             var addedInventory = await _inventoryRepository.AddAsync(inventory);
             await _dbContext.SaveChangesAsync();
             // Reload full object with Material and Designer
             var fullInventory = await _dbContext.DesignerMaterialInventories
-                .Include(dmi => dmi.Designer)
                 .Include(dmi => dmi.Material)
                 .FirstOrDefaultAsync(dmi => dmi.InventoryId == addedInventory.InventoryId);
             return _mapper.Map<DesignerMaterialInventoryModel>(fullInventory);
@@ -75,8 +71,7 @@ namespace EcoFashionBackEnd.Services
             var inventory = await _inventoryRepository.GetByIdAsync(inventoryId);
             if (inventory == null)
                 return null;
-            if (inventory.DesignerId != designer.DesignerId)
-                throw new ArgumentException("Bạn không có quyền sửa kho vật liệu này");
+           
             _mapper.Map(request, inventory);
             inventory.Status = inventory.Quantity != 0
                 ? "in_stock"
@@ -94,8 +89,7 @@ namespace EcoFashionBackEnd.Services
             var inventory = await _inventoryRepository.GetByIdAsync(inventoryId);
             if (inventory == null)
                 return false;
-            if (inventory.DesignerId != designer.DesignerId)
-                throw new ArgumentException("Bạn không có quyền xóa kho vật liệu này");
+            
             _inventoryRepository.Remove(inventoryId);
             await _dbContext.SaveChangesAsync();
             return true;
@@ -106,8 +100,6 @@ namespace EcoFashionBackEnd.Services
             try
             {
                 var inventories = await _dbContext.DesignerMaterialInventories
-                    .Where(dmi => dmi.Designer.DesignerId == designerId)
-                    .Include(dmi => dmi.Designer)
                     .Include(dmi => dmi.Material).ThenInclude(m => m.Supplier)
                     .ToListAsync();
                 var inventoriesDtos = new List<DesignerMaterialInventoryDto>();
@@ -120,13 +112,8 @@ namespace EcoFashionBackEnd.Services
                     {
                         InventoryId = inventorie.InventoryId,
                         MaterialId = inventorie.MaterialId,
-                        Quantity = inventorie.Quantity,
-                        Cost = inventorie.Cost,
-                        Designer = new DesignerPublicDto
-                        {
-                            DesignerName = inventorie.Designer.DesignerName,
-                        },
-
+                        Quantity = (int?)inventorie.Quantity,
+                        LastBuyDate = inventorie.LastBuyDate,
                         Material = new DesginerStoredMaterialsDto
                         {
                             MaterialId = inventorie.Material.MaterialId,

@@ -5,9 +5,8 @@
         public int MaterialId { get; set; }
         public string MaterialName { get; set; }
         public decimal MeterUsed { get; set; }
-
-
-
+        public string Certificates { get; set;}
+        public string Description { get; set; }
 
         //public int MaterialId { get; set; }
         //public double PersentageUsed { get; set; }

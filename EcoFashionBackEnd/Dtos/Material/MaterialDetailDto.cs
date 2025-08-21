@@ -2,6 +2,7 @@
 using EcoFashionBackEnd.Entities;
 using EcoFashionBackEnd.Dtos;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices;
 
 namespace EcoFashionBackEnd.Dtos.Material
 {
@@ -10,6 +11,8 @@ namespace EcoFashionBackEnd.Dtos.Material
         public int MaterialId { get; set; }
         public string Name { get; set; } = "";
         public string Description { get; set; } = "";
+        //public int TypeId { get; set; }
+
         public string MaterialTypeName { get; set; } = "";
         public decimal? RecycledPercentage { get; set; }
         public int QuantityAvailable { get; set; }
@@ -27,6 +30,7 @@ namespace EcoFashionBackEnd.Dtos.Material
         public string? ManufacturingProcess { get; set; }
         public string? CertificationDetails { get; set; }
         public DateTime? CertificationExpiryDate { get; set; }
+        public string  DocumentationUrl { get; set; } = "";
         public decimal? TransportDistance { get; set; }
         public string? TransportMethod { get; set; }
         public string? ApprovalStatus { get; set; }

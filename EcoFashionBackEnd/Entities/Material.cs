@@ -56,14 +56,23 @@ namespace EcoFashionBackEnd.Entities
         public decimal? TransportDistance { get; set; } // Distance in km
         public string? TransportMethod { get; set; } // Sea, Air, Land, Rail
         
-        // Organic Certification Explanation:
+        // Sustainability Certification Explanation (13 supported certifications):
+        // Business Rule: Any recognized certification = Full 20% sustainability score
+        //
+        // Recognized Certifications:
         // - GOTS (Global Organic Textile Standard): https://global-standard.org/
-        // - OEKO-TEX Standard 100: https://www.oeko-tex.com/
+        // - Cradle to Cradle Certified: https://www.c2ccertified.org/
         // - USDA Organic: https://www.usda.gov/topics/organic
+        // - BLUESIGN: https://www.bluesign.com/
+        // - OCS (Organic Content Standard): https://textileexchange.org/standards/organic-content-standard/
         // - EU Ecolabel: https://ec.europa.eu/environment/ecolabel/
-        // - Soil Association: https://www.soilassociation.org/
+        // - Fairtrade: https://www.fairtrade.net/
+        // - BCI (Better Cotton Initiative): https://bettercotton.org/
+        // - OEKO-TEX Standard 100: https://www.oeko-tex.com/
         // - RWS (Responsible Wool Standard): https://textileexchange.org/standards/rws/
+        // - ECO PASSPORT by OEKO-TEX: https://www.oeko-tex.com/en/our-standards/eco-passport
         // - GRS (Global Recycled Standard): https://textileexchange.org/standards/grs/
+        // - RCS (Recycled Claim Standard): https://textileexchange.org/standards/recycled-claim-standard/
 
         public string? ApprovalStatus { get; set; } // Pending, Approved, Rejected
         public string? AdminNote { get; set; }

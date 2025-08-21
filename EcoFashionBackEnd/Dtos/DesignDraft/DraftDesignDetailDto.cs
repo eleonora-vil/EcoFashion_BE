@@ -1,4 +1,6 @@
-﻿namespace EcoFashionBackEnd.Dtos.DesignDraft
+﻿using EcoFashionBackEnd.Entities;
+
+namespace EcoFashionBackEnd.Dtos.DesignDraft
 {
     public class DraftDesignDetailDto
     {
@@ -17,6 +19,8 @@
         public float TotalWater { get; set; }
         public float TotalWaste { get; set; }
 
+        //Features
+        public DesignFeatureModel DesignFeature { get; set; }    
         // Parts
         public List<DraftPartDto> DraftParts { get; set; } = new();
 

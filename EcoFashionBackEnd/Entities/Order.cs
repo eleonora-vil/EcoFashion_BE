@@ -41,11 +41,14 @@ namespace EcoFashionBackEnd.Entities
         // Per-seller routing
         public string? SellerType { get; set; } // "Supplier" or "Designer"
         public Guid? SellerId { get; set; }
+        public bool IsPaidOut { get; set; } = false;
+
         // Expiry to release reserved stock
         public DateTime? ExpiresAt { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime CreateAt { get; set; } = DateTime.Now;
         public virtual ICollection<PaymentTransaction> PaymentTransactions { get; set; } = new List<PaymentTransaction>();
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     }
     public enum OrderStatus
     {
@@ -58,7 +61,7 @@ namespace EcoFashionBackEnd.Entities
     public enum PaymentStatus
     {
         Pending,
-        Paid,
+        Paid,// check out trừ tiền trong ví customer + ở ví admin (ví hệ thống)+ hết có walletTransaction 
         Failed,
         Expired
     }
@@ -67,7 +70,7 @@ namespace EcoFashionBackEnd.Entities
         None,
         Processing,
         Shipped,
-        Delivered,
+        Delivered,// chia tiền admin trả tiền lại người bán 90% 
         Canceled
     }
 }

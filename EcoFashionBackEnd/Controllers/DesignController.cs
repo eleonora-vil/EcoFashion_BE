@@ -9,6 +9,7 @@ using EcoFashionBackEnd.Dtos.DesignShow;
 using EcoFashionBackEnd.Services;
 using Humanizer;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 namespace EcoFashionBackEnd.Controllers;
@@ -82,6 +83,119 @@ public class DesignController : ControllerBase
         }
     }
 
+    [HttpGet("GetDesignsWithProductsPagination")]
+    public async Task<IActionResult> GetAllDesignPagination([FromQuery] int page, [FromQuery] int pageSize)
+    {
+        var result = await _designService.GetDesignsWithProductsPaginationAsync(page, pageSize);
+        return Ok(ApiResult<List<DesignWithProductInfoDto>>.Succeed(result));
+    }
+
+    [HttpGet("GetAllPagination-by-designer/{designerId}")]
+    public async Task<IActionResult> GetAllDesignsByDesignerIdPagination(Guid designerId, [FromQuery] int page = 1, [FromQuery] int pageSize = 12)
+    {
+        var result = await _designService.GetDesignsWithDesignerPaginationAsync(designerId, page, pageSize);
+
+        if (result == null || !result.Any())
+            return NotFound(ApiResult<List<DesignWithProductInfoDto>>.Fail("Không tìm thấy thiết kế nào cho nhà thiết kế này."));
+
+        return Ok(ApiResult<List<DesignWithProductInfoDto>>.Succeed(result));
+    }
+
+    [HttpGet("design-variant/{designerId}")]
+    public async Task<IActionResult> GetDesignsWithoutProductsByDesignerId(Guid designerId)
+    {
+        try
+        {
+            // Kiểm tra tham số đầu vào
+            if (designerId == Guid.Empty)
+            {
+                return BadRequest(ApiResult<List<DesignSummaryDto>>.Fail("DesignerId không được để trống."));
+            }
+
+            // Gọi service lấy danh sách design có product cho designer đó
+            var designs = await _designService.GetDesignsWithoutProductsByDesignerIdAsync(designerId);
+
+            // Nếu không tìm thấy design nào
+            if (designs == null || designs.Count == 0)
+            {
+                return NotFound(ApiResult<List<DesignSummaryDto>>.Fail("Không tìm thấy thiết kế nào cho designer này."));
+            }
+
+            // Trả về kết quả thành công với data
+            return Ok(ApiResult<List<DesignSummaryDto>>.Succeed(designs));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ApiResult<List<DesignSummaryDto>>.Fail("Có lỗi xảy ra trong quá trình xử lý."));
+        }
+    }
+
+    [HttpGet("designs-with-products/{designerId}")]
+    public async Task<IActionResult> GetDesignsWithProductsAnDesignerId(Guid designerId)
+    {
+        try
+        {
+            // Kiểm tra tham số đầu vào
+            if (designerId == Guid.Empty)
+            {
+                return BadRequest(ApiResult<List<DesignSummaryDto>>.Fail("DesignerId không được để trống."));
+            }
+
+            // Gọi service lấy danh sách design có product cho designer đó
+            var designs = await _designService.GetDesignsWithProductsAndDesignerIdAsync(designerId);
+
+            // Nếu không tìm thấy design nào
+            if (designs == null || designs.Count == 0)
+            {
+                return NotFound(ApiResult<List<DesignWithProductInfoDto>>.Fail("Không tìm thấy thiết kế nào cho designer này."));
+            }
+
+            // Trả về kết quả thành công với data
+            return Ok(ApiResult<List<DesignWithProductInfoDto>>.Succeed(designs));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ApiResult<List<DesignSummaryDto>>.Fail("Có lỗi xảy ra trong quá trình xử lý."));
+        }
+    }
+
+    [HttpGet("designProductDetails/{designId}/{designerId}")]
+    public async Task<IActionResult> GetDesignWithProductsDetail(int designId, Guid designerId)
+    {
+        try
+        {
+            var result = await _designService.GetProductsByDesignAsync(designId, designerId);
+            return Ok(ApiResult<List<ProductDto>>.Succeed(result));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ApiResult<List<ProductDto>>.Fail(ex.Message));
+        }
+    }
+    [HttpPut("update-basic-info")]
+    public async Task<IActionResult> UpdateProductBasicInfo([FromForm] UpdateProductDto input)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+        {
+            return Unauthorized(ApiResult<bool>.Fail("Không thể xác định người dùng."));
+        }
+
+        var designerId = await _designerService.GetDesignerIdByUserId(userId);
+        if (designerId == Guid.Empty)
+        {
+            return BadRequest(ApiResult<bool>.Fail("Không tìm thấy Designer tương ứng."));
+        }
+
+        var success = await _designService.UpdateProductBasicInfoAsync(input, (Guid)designerId);
+
+        if (!success)
+        {
+            return BadRequest(ApiResult<object>.Fail("Cập nhật thất bại. Thiết kế không tồn tại hoặc bạn không có quyền."));
+        }
+
+        return Ok(ApiResult<object>.Succeed("Cập nhật thành công."));
+    }
 
 
 

@@ -16,9 +16,11 @@ namespace EcoFashionBackEnd.Dtos.Design
         public float? CarbonFootprint { get; set; }
         public float? WaterUsage { get; set; }
         public float? WasteDiverted { get; set; }
+        public string CareInstruction { get; set; }
         public DesignFeatureDto Feature { get; set; }
         public List<ProductDto> Products { get; set; }
         public List<string> DesignImages { get; set; }
-        public List<string> Materials { get; set; }
+        public List<MaterialDto> Materials { get; set; }
+        public DesignerPublicDto Designer { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EcoFashionBackEnd.Entities
 {
@@ -8,8 +9,10 @@ namespace EcoFashionBackEnd.Entities
         public int MaterialId { get; set; }
         public int WarehouseId { get; set; }
 
-        // SupplierReceipt, ManualAdjustment, ProductionUse, TransferIn, TransferOut, SalesIssue, PurchaseReturn, SalesReturn
-        public string TransactionType { get; set; } = "SupplierReceipt";
+        /// <summary>
+        /// Loại giao dịch inventory
+        /// </summary>
+        public MaterialTransactionType TransactionType { get; set; } = MaterialTransactionType.SupplierReceipt;
 
         public decimal QuantityChange { get; set; } // +/-
         public decimal BeforeQty { get; set; }

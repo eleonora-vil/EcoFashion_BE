@@ -13,6 +13,9 @@ namespace EcoFashionBackEnd.Entities
 
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Wallet> Wallets { get; set; }
+        public DbSet<WalletTransaction> WalletTransactions { get; set; }
+
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Designer> Designers { get; set; }
         public DbSet<Application> Applications { get; set; }
@@ -40,13 +43,21 @@ namespace EcoFashionBackEnd.Entities
         public DbSet<OrderGroup> OrderGroups { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<MaterialStock> MaterialStocks { get; set; }
         public DbSet<MaterialStockTransaction> MaterialStockTransactions { get; set; }
         public DbSet<ProductInventory> ProductInventories { get; set; }
         public DbSet<ProductInventoryTransaction> ProductInventoryTransactions { get; set; }
+        public DbSet<MaterialInventoryTransaction> MaterialInventoryTransactions { get; set; }
+
         public DbSet<Review> Reviews { get; set; }
+
+
+
+
 
         #endregion
 
@@ -59,6 +70,10 @@ namespace EcoFashionBackEnd.Entities
                 .WithMany()
                 .HasForeignKey(u => u.RoleId)
                 .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.PaymentTransactions)
+                .WithOne(pt => pt.User)
+                .HasForeignKey(pt => pt.UserId);
             #region user
 
             // SUPPLIER PROFILE
@@ -109,6 +124,16 @@ namespace EcoFashionBackEnd.Entities
             modelBuilder.Entity<Application>()
                 .Property(a => a.Status)
                 .HasConversion<string>();
+            #endregion
+            #region wallet
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Wallet)
+                .WithOne(w => w.User)
+                .HasForeignKey<Wallet>(w => w.UserId);
+            modelBuilder.Entity<Wallet>()
+                .HasMany(w => w.WalletTransactions)
+                .WithOne(wt => wt.Wallet)
+                .HasForeignKey(wt => wt.WalletId);
             #endregion
             #region DESIGN
             // ------------------ SIZE & VARIANT ------------------
@@ -251,11 +276,7 @@ namespace EcoFashionBackEnd.Entities
                     .OnDelete(DeleteBehavior.Restrict);
                 // Restrict: tránh xóa design làm mất hết sản phẩm
 
-                // Variant (có thể null vì chỉ phục vụ kế hoạch)
-                entity.HasOne(p => p.Variant)
-                    .WithMany()
-                    .HasForeignKey(p => p.VariantId)
-                    .OnDelete(DeleteBehavior.SetNull);
+              
                 // SetNull: nếu variant kế hoạch bị xóa, product vẫn tồn tại
 
                 // Size (bắt buộc)
@@ -291,6 +312,30 @@ namespace EcoFashionBackEnd.Entities
                       .IsRequired()
                       .HasMaxLength(50); // "Material" hoặc "Product"
             });
+
+            // Quan hệ 1-nhiều: Warehouse có nhiều DesignerMaterialInventory
+            modelBuilder.Entity<Warehouse>()
+                .HasMany(w => w.MaterialInventories)
+                .WithOne(mi => mi.Warehouse)
+                .HasForeignKey(mi => mi.WarehouseId);
+
+            // Quan hệ 1-nhiều: Warehouse có nhiều ProductInventory
+            modelBuilder.Entity<Warehouse>()
+                .HasMany(w => w.ProductInventories)
+                .WithOne(pi => pi.Warehouse)
+                .HasForeignKey(pi => pi.WarehouseId);
+
+            // Quan hệ 1-nhiều: DesignerMaterialInventory có nhiều MaterialInventoryTransaction
+            modelBuilder.Entity<DesignerMaterialInventory>()
+                .HasMany(mi => mi.MaterialInventoryTransactions)
+                .WithOne(mit => mit.MaterialInventory)
+                .HasForeignKey(mit => mit.InventoryId);
+
+            // Quan hệ 1-nhiều: ProductInventory có nhiều ProductInventoryTransaction
+            modelBuilder.Entity<ProductInventory>()
+                .HasMany(pi => pi.ProductInventoryTransaction)
+                .WithOne(pit => pit.ProductInventory)
+                .HasForeignKey(pit => pit.InventoryId);
             #endregion
             #region ProductInventory
             modelBuilder.Entity<ProductInventory>(entity =>
@@ -326,7 +371,7 @@ namespace EcoFashionBackEnd.Entities
 
                 // Transaction ↔ ProductInventory (N-1)
                 entity.HasOne(t => t.ProductInventory)
-                      .WithMany(pi => pi.Transactions)
+                      .WithMany(pi => pi.ProductInventoryTransaction)
                       .HasForeignKey(t => t.InventoryId)
                       .OnDelete(DeleteBehavior.Cascade);
 
@@ -352,6 +397,45 @@ namespace EcoFashionBackEnd.Entities
                     .HasMaxLength(500);
             });
             #endregion
+
+            #region MaterialInventoryTransaction
+            modelBuilder.Entity<MaterialInventoryTransaction>(entity =>
+            {
+                entity.HasKey(t => t.TransactionId);
+
+                // Transaction ↔ ProductInventory (N-1)
+                entity.HasOne(t => t.MaterialInventory)
+                      .WithMany(pi => pi.MaterialInventoryTransactions)
+                      .HasForeignKey(t => t.InventoryId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+
+                // ProductInventoryTransaction ↔ User: Nhiều giao dịch do 1 User thực hiện
+                // Transaction ↔ User (N-1)
+                entity.HasOne(t => t.User)
+                      .WithMany() // Nếu muốn tracking User → Transactions thì tạo ICollection<Transaction> bên User
+                      .HasForeignKey(t => t.PerformedByUserId)
+                      .OnDelete(DeleteBehavior.Restrict);
+                // Restrict: Giữ lịch sử, không cho xóa User nếu còn transaction
+
+                entity.Property(t => t.QuantityChanged)
+                    .IsRequired();
+
+                entity.Property(t => t.TransactionDate)
+                    .IsRequired();
+
+                entity.Property(t => t.TransactionType)
+                    .HasMaxLength(50);
+
+                entity.Property(t => t.Notes)
+                    .HasMaxLength(500);
+            });
+            #endregion
+
+
+
+
+
             #region Material 
             // -------- INVENTORY (MATERIAL) --------
             modelBuilder.Entity<Warehouse>(entity =>
@@ -443,11 +527,7 @@ namespace EcoFashionBackEnd.Entities
                 .Property(ms => ms.Value)
                 .HasPrecision(18, 2);
 
-            modelBuilder.Entity<DesignerMaterialInventory>()
-                .HasOne(dmi => dmi.Designer)
-                .WithMany()
-                .HasForeignKey(dmi => dmi.DesignerId)
-                .OnDelete(DeleteBehavior.Cascade);
+           
             modelBuilder.Entity<DesignerMaterialInventory>()
                 .HasOne(dmi => dmi.Material)
                 .WithMany()
@@ -547,8 +627,41 @@ namespace EcoFashionBackEnd.Entities
                 .HasConversion<string>();
             #endregion Order
 
+            // ------------------ CART ------------------
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasKey(c => c.CartId);
+                entity.HasOne(c => c.User)
+                      .WithMany()
+                      .HasForeignKey(c => c.UserId)
+                      .OnDelete(DeleteBehavior.Restrict);
+                entity.HasIndex(c => new { c.UserId, c.IsActive })
+                      .HasFilter("[UserId] IS NOT NULL AND [IsActive] = 1")
+                      .IsUnique();
+                entity.Property(c => c.CreatedAt);
+                entity.Property(c => c.UpdatedAt);
+            });
+
+            modelBuilder.Entity<CartItem>(entity =>
+            {
+                entity.HasKey(ci => ci.CartItemId);
+                entity.HasOne(ci => ci.Cart)
+                      .WithMany(c => c.Items)
+                      .HasForeignKey(ci => ci.CartId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                // Khóa logic: CartId + MaterialId để tránh trùng cùng một chất liệu trong cart
+                entity.HasIndex(ci => new { ci.CartId, ci.MaterialId })
+                      .IsUnique();
+
+                entity.Property(ci => ci.UnitPriceSnapshot).HasPrecision(18, 2);
+            });
+
             #region PaymentTransaction
             // Order ↔ User
+            modelBuilder.Entity<Order>()
+               .Property(o => o.IsPaidOut)
+               .HasDefaultValue(false);
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.User)
                 .WithMany(u => u.Orders)
@@ -572,7 +685,10 @@ namespace EcoFashionBackEnd.Entities
             modelBuilder.Entity<PaymentTransaction>()
                 .HasIndex(pt => pt.TxnRef)
                 .IsUnique();
-
+            modelBuilder.Entity<PaymentTransaction>()
+                .HasMany(pt => pt.WalletTransactions)
+                .WithOne(wt => wt.PaymentTransaction)
+                .HasForeignKey(wt => wt.PaymentTransactionId);
             #endregion
 
             #region unique

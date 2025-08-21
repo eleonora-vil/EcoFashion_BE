@@ -27,8 +27,8 @@ namespace EcoFashionBackEnd.Common.Payloads.Requests.DessignDraft
     }
 }
 
-//    [{ "name": "Thân áo", "length": 20, "width": 10, "quantity": 2, "materialId": 1,    },
-//    {"name": "Tay áo", "length": 20, "width": 20, "quantity": 1, "materialId": 2,  }]
+//[{ "name": "Thân áo", "length": 20, "width": 10, "quantity": 2, "materialId": 1,    },
+//    { "name": "Tay áo", "length": 20, "width": 20, "quantity": 1, "materialId": 2,  }]
 
 
   //[ { "MaterialId":1, "PercentageUsed":50, "MeterUsed":2.5 },{ "MaterialId":2, "PercentageUsed":50, "MeterUsed":2.5 } ]

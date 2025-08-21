@@ -53,16 +53,13 @@ namespace EcoFashionBackEnd.Data.test
                 }
 
                 // Organic Certification (CriterionId = 4)
-                // Kiểm tra xem material có organic certification không
-                var hasOrganicCert = material.CertificationDetails?.Contains("GOTS") == true || 
-                                   material.CertificationDetails?.Contains("OEKO-TEX") == true ||
-                                   material.CertificationDetails?.Contains("GRS") == true ||
-                                   material.CertificationDetails?.Contains("OCS") == true;
+                // Check if material has any recognized sustainability certification
+                var hasOrganicCert = HasRecognizedCertification(material.CertificationDetails);
                 materialSustainabilities.Add(new MaterialSustainability
                 {
                     MaterialId = material.MaterialId,
                     CriterionId = 4,
-                    Value = hasOrganicCert ? 1m : 0m
+                    Value = hasOrganicCert ? 100m : 0m  // Use 100 scale to match business logic
                 });
 
                 // Transport (CriterionId = 5) - Calculated from TransportDistance and TransportMethod
@@ -73,6 +70,44 @@ namespace EcoFashionBackEnd.Data.test
 
             await context.MaterialSustainabilities.AddRangeAsync(materialSustainabilities);
             await context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Check if certification details contain any recognized sustainability certification
+        /// This matches the same logic used in SustainabilityService.HasOrganicCertification()
+        /// </summary>
+        private static bool HasRecognizedCertification(string? certificationDetails)
+        {
+            if (string.IsNullOrWhiteSpace(certificationDetails))
+                return false;
+
+            var details = certificationDetails.ToUpperInvariant();
+            
+            // Tier 1: Comprehensive sustainability standards
+            if (details.Contains("GOTS") || 
+                details.Contains("CRADLE TO CRADLE") || 
+                details.Contains("USDA ORGANIC") || 
+                details.Contains("BLUESIGN"))
+                return true;
+
+            // Tier 2: High-value specialized standards
+            if (details.Contains("OCS") || 
+                details.Contains("EU ECOLABEL") || 
+                details.Contains("FAIRTRADE") || 
+                details.Contains("BCI") || 
+                details.Contains("BETTER COTTON") ||
+                details.Contains("OEKO-TEX") ||  // Matches "OEKO-TEX Standard 100", etc.
+                details.Contains("RWS") || 
+                details.Contains("ECO PASSPORT"))
+                return true;
+
+            // Tier 3: Material-specific recycling standards
+            if (details.Contains("GRS") || 
+                details.Contains("RCS") || 
+                details.Contains("RECYCLED CLAIM"))
+                return true;
+
+            return false;
         }
     }
 }

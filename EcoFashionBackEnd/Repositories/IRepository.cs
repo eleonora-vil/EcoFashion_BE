@@ -12,11 +12,13 @@ public interface IRepository<TEntity, in TKey>
     Task AddRangeAsync(IEnumerable<TEntity> entities);
     void RemoveRange(IEnumerable<TEntity> entities);
     TEntity Update(TEntity entity);
+    Task<TEntity> UpdateAsync(TEntity entity);
     TEntity Remove(TKey id);
     Task<int> Commit();
     Task<int> CountAsync();
     Task<decimal> SumAsync(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, decimal>> selector);
-
+    void Remove(TEntity entity);
+    Task RemoveAsync(TKey id);
 
 
 

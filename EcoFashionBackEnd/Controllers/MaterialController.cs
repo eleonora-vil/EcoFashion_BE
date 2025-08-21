@@ -25,8 +25,68 @@ namespace EcoFashionBackEnd.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllMaterials()
         {
-            var result = await _materialService.GetAllMaterialsAsync();
+            // Use the new comprehensive method with default parameters (public only, sorted by sustainability)
+            var result = await _materialService.GetAllMaterialsWithFiltersAsync(
+                sortBySustainability: true, 
+                publicOnly: true
+            );
             return Ok(result);
+        }
+        
+        /// <summary>
+        /// Get all materials with comprehensive filtering and sorting by sustainability score
+        /// </summary>
+        [HttpGet("filtered")]
+        public async Task<IActionResult> GetAllMaterialsWithFilters(
+            [FromQuery] int? typeId = null,
+            [FromQuery] string? supplierId = null,
+            [FromQuery] string? supplierName = null,
+            [FromQuery] string? materialName = null,
+            [FromQuery] string? productionCountry = null,
+            [FromQuery] decimal? minPrice = null,
+            [FromQuery] decimal? maxPrice = null,
+            [FromQuery] int? minQuantity = null,
+            [FromQuery] bool? hasCertification = null,
+            [FromQuery] string? transportMethod = null,
+            [FromQuery] bool sortBySustainability = true,
+            [FromQuery] bool publicOnly = true)
+        {
+            try
+            {
+                Guid? supplierGuid = null;
+                if (!string.IsNullOrWhiteSpace(supplierId))
+                {
+                    if (Guid.TryParse(supplierId, out var parsedGuid))
+                    {
+                        supplierGuid = parsedGuid;
+                    }
+                    else
+                    {
+                        return BadRequest(ApiResult<object>.Fail("Invalid supplier ID format"));
+                    }
+                }
+
+                var result = await _materialService.GetAllMaterialsWithFiltersAsync(
+                    typeId: typeId,
+                    supplierId: supplierGuid,
+                    supplierName: supplierName,
+                    materialName: materialName,
+                    productionCountry: productionCountry,
+                    minPrice: minPrice,
+                    maxPrice: maxPrice,
+                    minQuantity: minQuantity,
+                    hasCertification: hasCertification,
+                    transportMethod: transportMethod,
+                    sortBySustainability: sortBySustainability,
+                    publicOnly: publicOnly
+                );
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ApiResult<object>.Fail($"Error: {ex.Message}"));
+            }
         }
 
         // Admin: get all materials regardless of approval/availability
@@ -99,7 +159,7 @@ namespace EcoFashionBackEnd.Controllers
         [HttpGet("GetProductionCountries")]
         public IActionResult GetProductionCountries()
         {
-            var countries = TransportCalculationService.GetCommonProductionCountries();
+            var countries = TransportCalculationService.GetSupportedCountries();
             return Ok(new { countries });
         }
 
@@ -134,7 +194,12 @@ namespace EcoFashionBackEnd.Controllers
         [HttpGet("GetAllMaterialByType/{typeId}")]
         public async Task<IActionResult> GetAllMaterialByType(int typeId)
         {
-            var result = await _materialService.GetAllMaterialByTypeAsync(typeId);
+            // Use the new comprehensive method with typeId filter (public only, sorted by sustainability)
+            var result = await _materialService.GetAllMaterialsWithFiltersAsync(
+                typeId: typeId,
+                sortBySustainability: true,
+                publicOnly: true
+            );
             return Ok(result);
         }
 
@@ -157,6 +222,39 @@ namespace EcoFashionBackEnd.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ApiResult<object>.Fail($"Error getting supplier materials: {ex.Message}"));
+            }
+        }
+
+        [HttpGet("GetAvailableTransportMethods")]
+        public IActionResult GetAvailableTransportMethods([FromQuery] string country)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(country))
+                {
+                    return BadRequest(ApiResult<object>.Fail("Country parameter is required"));
+                }
+
+                var transportMethods = TransportCalculationService.GetAvailableTransportMethods(country);
+                return Ok(ApiResult<object>.Succeed(transportMethods));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ApiResult<object>.Fail($"Error getting transport methods: {ex.Message}"));
+            }
+        }
+
+        [HttpGet("GetSupportedCountries")]
+        public IActionResult GetSupportedCountries()
+        {
+            try
+            {
+                var countries = TransportCalculationService.GetSupportedCountries();
+                return Ok(ApiResult<object>.Succeed(countries));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ApiResult<object>.Fail($"Error getting supported countries: {ex.Message}"));
             }
         }
 

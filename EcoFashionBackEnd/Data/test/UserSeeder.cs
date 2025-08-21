@@ -27,6 +27,18 @@ namespace EcoFashionBackEnd.Data.test
 
             await context.Users.AddRangeAsync(users);
             await context.SaveChangesAsync();
+
+            var wallets = users.Select(u => new Wallet
+            {
+                UserId = u.UserId,
+                Balance = 1000000,
+                Status = WalletStatus.Active,
+                CreatedAt = DateTime.UtcNow,
+                LastUpdatedAt = DateTime.UtcNow
+            }).ToList();
+
+            await context.Wallets.AddRangeAsync(wallets);
+            await context.SaveChangesAsync();
         }
     }
 

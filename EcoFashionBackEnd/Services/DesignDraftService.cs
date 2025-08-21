@@ -3,6 +3,7 @@ using EcoFashionBackEnd.Common;
 using EcoFashionBackEnd.Common.Payloads.Requests;
 using EcoFashionBackEnd.Common.Payloads.Requests.DessignDraft;
 using EcoFashionBackEnd.Common.Payloads.Responses;
+using EcoFashionBackEnd.Dtos;
 using EcoFashionBackEnd.Dtos.DesignDraft;
 using EcoFashionBackEnd.Entities;
 using EcoFashionBackEnd.Repositories;
@@ -25,6 +26,8 @@ namespace EcoFashionBackEnd.Services
         private readonly IRepository<Image, int> _imageRepository;
         private readonly IRepository<ItemTypeSizeRatio, int> _itemTypeSizeRatioRepository;
         private readonly IRepository<ItemType, int> _itemTypeRepository;
+        private readonly IRepository<DesignFeature, int> _designFeatureRepository;
+
 
         private readonly CloudService _cloudService;
         private readonly IMapper _mapper;
@@ -40,6 +43,8 @@ namespace EcoFashionBackEnd.Services
             IRepository<Image, int> imageRepository,
             IRepository<ItemTypeSizeRatio, int> itemTypeSizeRatioRepository,
             IRepository<ItemType, int> itemTypeRepository,
+            IRepository<DesignFeature, int> designFeatureRepository,
+
 
             CloudService cloudService,
             IMapper mapper)
@@ -54,7 +59,7 @@ namespace EcoFashionBackEnd.Services
             _imageRepository = imageRepository;
             _itemTypeSizeRatioRepository = itemTypeSizeRatioRepository;
             _itemTypeRepository = itemTypeRepository;
-
+            _designFeatureRepository = designFeatureRepository;
             _cloudService = cloudService;
             _mapper = mapper;
         }
@@ -217,6 +222,7 @@ namespace EcoFashionBackEnd.Services
                 .AsNoTracking()
                 .Where(d => d.DesignId == designId && d.DesignerId == designerId)
                 .Include(d => d.DraftParts)
+                .Include(d =>d.DesignFeatures)
                 .Include(d => d.DesignsMaterials)
                     .ThenInclude(dm => dm.Materials)
                 .Include(d => d.DraftSketches)
@@ -244,7 +250,13 @@ namespace EcoFashionBackEnd.Services
                     Quantity = p.Quantity,
                     MaterialId = p.MaterialId,
                 }).ToList(),
-
+                DesignFeature = new DesignFeatureModel
+                {
+                    ReduceWaste = design.DesignFeatures?.ReduceWaste ?? false,
+                    LowImpactDyes = design.DesignFeatures?.LowImpactDyes ?? false,
+                    Durable = design.DesignFeatures?.Durable ?? false,
+                    EthicallyManufactured = design.DesignFeatures?.EthicallyManufactured ?? false
+                },
                 Materials = design.DesignsMaterials.Select(m => new DesignMaterialDto
                 {
                     MaterialId = m.MaterialId,
@@ -445,7 +457,43 @@ namespace EcoFashionBackEnd.Services
                 .ToListAsync();
         }
 
+        public async Task<bool> DeleteDesignAsync(int designId, Guid designerId)
+        {
+            // Tìm Design, đảm bảo nó thuộc về designer và không có Product
+            var design = await _designRepository
+                .GetAll()
+                .Where(d => d.DesignId == designId && d.DesignerId == designerId) // Thêm điều kiện DesignerId
+                .Include(d => d.Products)
+                .Include(d => d.DraftSketches)
+                .Include(d => d.DesignImages)
+                .FirstOrDefaultAsync();
 
+            if (design == null)
+            {
+                // Trả về false nếu không tìm thấy thiết kế (có thể do sai ID hoặc không thuộc về designer)
+                return false;
+            }
+
+            // Kiểm tra Product trước khi xóa
+            if (design.Products != null && design.Products.Any())
+            {
+                return false; // Không thể xóa vì đã có sản phẩm được tạo
+            }
+
+            // Xóa các bảng liên quan
+            if (design.DraftSketches != null && design.DraftSketches.Any())
+            {
+                _draftSketchRepository.RemoveRange(design.DraftSketches);
+            }
+
+            // Xóa bản thân đối tượng Design chính
+            _designRepository.Remove(design);
+
+            // Lưu tất cả các thay đổi vào cơ sở dữ liệu
+            await _designRepository.Commit();
+
+            return true;
+        }
     }
 }
 

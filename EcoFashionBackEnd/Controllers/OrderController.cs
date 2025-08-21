@@ -92,6 +92,39 @@ public class OrderController : ControllerBase
 
         return Ok(statuses);
     }
-    
+
+
+    [HttpPost("Create Order for test")]
+    public async Task<IActionResult> CreateSampleOrderGroup()
+    {
+        var orderGroup = await _orderService.CreateSampleOrderGroupAsync();
+
+        var result = new
+        {
+            orderGroup.OrderGroupId,
+            orderGroup.UserId,
+            orderGroup.TotalOrders,
+            Orders = orderGroup.Orders.Select(o => new
+            {
+                o.OrderId,
+                o.SellerId,
+                o.SellerType,
+                o.TotalPrice,
+                Details = o.OrderDetails.Select(d => new
+                {
+                    d.OrderDetailId,
+                    d.DesignId,
+                    d.MaterialId,
+                    d.Type,
+                    d.Quantity,
+                    d.UnitPrice,
+                    LineTotal = d.Quantity * d.UnitPrice
+                })
+            })
+        };
+
+        return Ok(result);
+    }
+
 
 }

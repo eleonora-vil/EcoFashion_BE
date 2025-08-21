@@ -7,6 +7,8 @@ using EcoFashionBackEnd.Dtos.DesignDraft;
 
 namespace EcoFashionBackEnd.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class DesignsVariantController : ControllerBase
     {
         private readonly DesignsVariantService _variantService;
@@ -39,7 +41,9 @@ namespace EcoFashionBackEnd.Controllers
         {
             try
             {
-                var created = await _variantService.CreateVariantAsync(designId, request);
+                // Gọi hàm với list chứa 1 phần tử nếu service yêu cầu list
+                var created = await _variantService.CreateVariantAsync(designId, new List<DesignsVariantCreateRequest> { request });
+
                 if (!created) return NotFound(ApiResult<bool>.Fail("Design không tồn tại."));
                 return Ok(ApiResult<bool>.Succeed(true));
             }

@@ -49,84 +49,84 @@ namespace EcoFashionBackEnd.Data.test
                 ("Organic Cotton", "Carbon Footprint") => 1.2m, // kg CO2e/mét (converted from kg)
                 ("Organic Cotton", "Water Usage") => 35m, // L/mét (converted from liters/kg)
                 ("Organic Cotton", "Waste Diverted") => 85m, // Industry standard for organic cotton
-                ("Organic Cotton", "Organic Certification") => 1m, // GOTS standard
+                ("Organic Cotton", "Organic Certification") => 100m, // GOTS standard (normalized to 100 scale)
                 ("Organic Cotton", "Transport") => 0m, // Transport calculated dynamically
 
                 // Recycled Cotton benchmarks (Source: Higg Index MSI, GRS Standard)
                 ("Recycled Cotton", "Carbon Footprint") => 1.0m, // kg CO2e/mét (converted from kg)
                 ("Recycled Cotton", "Water Usage") => 20m, // L/mét (converted from liters/kg)
                 ("Recycled Cotton", "Waste Diverted") => 90m, // GRS standard for recycled materials
-                ("Recycled Cotton", "Organic Certification") => 0m, // Recycled cotton not organic
+                ("Recycled Cotton", "Organic Certification") => 100m, // Can have GRS, RCS, OEKO-TEX certifications
                 ("Recycled Cotton", "Transport") => 0m, // Transport calculated dynamically
 
                 // Hemp benchmarks (Source: Higg Index MSI, Textile Exchange)
                 ("Hemp", "Carbon Footprint") => 2.2m, // Higg MSI: Hemp 2.2 kg CO2e/kg
                 ("Hemp", "Water Usage") => 75m, // Higg MSI: Hemp 75 liters/kg
                 ("Hemp", "Waste Diverted") => 85m, // Industry standard for hemp
-                ("Hemp", "Organic Certification") => 0m, // Hemp not always organic
+                ("Hemp", "Organic Certification") => 100m, // Can have OEKO-TEX, EU Ecolabel certifications
                 ("Hemp", "Transport") => 0m, // Transport calculated dynamically
 
                 // Recycled Polyester benchmarks (Source: Higg Index MSI, GRS Standard)
                 ("Recycled Polyester", "Carbon Footprint") => 1.6m, // Higg MSI: Recycled polyester 1.6 kg CO2e/kg
                 ("Recycled Polyester", "Water Usage") => 50m, // Higg MSI: Recycled polyester 50 liters/kg
                 ("Recycled Polyester", "Waste Diverted") => 88m, // GRS standard for recycled materials
-                ("Recycled Polyester", "Organic Certification") => 0m, // Recycled polyester not organic
+                ("Recycled Polyester", "Organic Certification") => 100m, // Can have GRS, RCS, OEKO-TEX certifications
                 ("Recycled Polyester", "Transport") => 0m, // Transport calculated dynamically
 
                 // Bamboo benchmarks (Source: Higg Index MSI, EU Ecolabel)
                 ("Bamboo", "Carbon Footprint") => 2.8m, // Higg MSI: Bamboo viscose 2.8 kg CO2e/kg
                 ("Bamboo", "Water Usage") => 95m, // Higg MSI: Bamboo viscose 95 liters/kg
                 ("Bamboo", "Waste Diverted") => 82m, // EU Ecolabel standard
-                ("Bamboo", "Organic Certification") => 0m, // Bamboo not always organic
+                ("Bamboo", "Organic Certification") => 100m, // Can have OEKO-TEX, EU Ecolabel certifications
                 ("Bamboo", "Transport") => 0m, // Transport calculated dynamically
 
                 // Tencel benchmarks (Source: Higg Index MSI, EU Ecolabel)
                 ("Tencel", "Carbon Footprint") => 2.1m, // Higg MSI: Tencel 2.1 kg CO2e/kg
                 ("Tencel", "Water Usage") => 70m, // Higg MSI: Tencel 70 liters/kg
                 ("Tencel", "Waste Diverted") => 85m, // EU Ecolabel standard
-                ("Tencel", "Organic Certification") => 0m, // Tencel not organic
+                ("Tencel", "Organic Certification") => 100m, // Tencel can have sustainability certifications like OEKO-TEX
                 ("Tencel", "Transport") => 0m, // Transport calculated dynamically
 
                 // Recycled Wool benchmarks (Source: Higg Index MSI, RWS Standard)
                 ("Recycled Wool", "Carbon Footprint") => 1.9m, // Higg MSI: Recycled wool 1.9 kg CO2e/kg
                 ("Recycled Wool", "Water Usage") => 65m, // Higg MSI: Recycled wool 65 liters/kg
                 ("Recycled Wool", "Waste Diverted") => 92m, // RWS standard for recycled materials
-                ("Recycled Wool", "Organic Certification") => 0m, // Recycled wool not organic
+                ("Recycled Wool", "Organic Certification") => 100m, // Can have RWS, OEKO-TEX certifications
                 ("Recycled Wool", "Transport") => 0m, // Transport calculated dynamically
 
                 // Organic Silk benchmarks (Source: Higg Index MSI, GOTS Standard)
                 ("Organic Silk", "Carbon Footprint") => 2.4m, // Higg MSI: Silk 2.4 kg CO2e/kg
                 ("Organic Silk", "Water Usage") => 80m, // Higg MSI: Silk 80 liters/kg
                 ("Organic Silk", "Waste Diverted") => 78m, // GOTS standard for organic silk
-                ("Organic Silk", "Organic Certification") => 1m, // GOTS standard
+                ("Organic Silk", "Organic Certification") => 100m, // GOTS standard (normalized to 100 scale)
                 ("Organic Silk", "Transport") => 0m, // Transport calculated dynamically
 
                 // Recycled Nylon benchmarks (Source: Higg Index MSI, GRS Standard)
                 ("Recycled Nylon", "Carbon Footprint") => 1.4m, // Higg MSI: Recycled nylon 1.4 kg CO2e/kg
                 ("Recycled Nylon", "Water Usage") => 45m, // Higg MSI: Recycled nylon 45 liters/kg
                 ("Recycled Nylon", "Waste Diverted") => 85m, // GRS standard for recycled materials
-                ("Recycled Nylon", "Organic Certification") => 0m, // Recycled nylon not organic
+                ("Recycled Nylon", "Organic Certification") => 100m, // Can have GRS, RCS, OEKO-TEX certifications
                 ("Recycled Nylon", "Transport") => 0m, // Transport calculated dynamically
 
                 // Organic Linen benchmarks (Source: Higg Index MSI, GOTS Standard)
                 ("Organic Linen", "Carbon Footprint") => 2.8m, // Higg MSI: Linen 2.8 kg CO2e/kg
                 ("Organic Linen", "Water Usage") => 90m, // Higg MSI: Linen 90 liters/kg
                 ("Organic Linen", "Waste Diverted") => 82m, // GOTS standard for organic linen
-                ("Organic Linen", "Organic Certification") => 1m, // GOTS standard
+                ("Organic Linen", "Organic Certification") => 100m, // GOTS standard (normalized to 100 scale)
                 ("Organic Linen", "Transport") => 0m, // Transport calculated dynamically
 
                 // Recycled Denim benchmarks (Source: Higg Index MSI, GRS Standard)
                 ("Recycled Denim", "Carbon Footprint") => 1.3m, // Higg MSI: Recycled denim 1.3 kg CO2e/kg
                 ("Recycled Denim", "Water Usage") => 40m, // Higg MSI: Recycled denim 40 liters/kg
                 ("Recycled Denim", "Waste Diverted") => 92m, // GRS standard for recycled materials
-                ("Recycled Denim", "Organic Certification") => 0m, // Recycled denim not organic
+                ("Recycled Denim", "Organic Certification") => 100m, // Can have GRS, RCS, OEKO-TEX certifications
                 ("Recycled Denim", "Transport") => 0m, // Transport calculated dynamically
 
                 // Organic Alpaca benchmarks (Source: Higg Index MSI, RWS Standard)
                 ("Organic Alpaca", "Carbon Footprint") => 2.1m, // Higg MSI: Alpaca 2.1 kg CO2e/kg
                 ("Organic Alpaca", "Water Usage") => 70m, // Higg MSI: Alpaca 70 liters/kg
                 ("Organic Alpaca", "Waste Diverted") => 80m, // RWS standard for organic alpaca
-                ("Organic Alpaca", "Organic Certification") => 1m, // RWS standard
+                ("Organic Alpaca", "Organic Certification") => 100m, // RWS standard (normalized to 100 scale)
                 ("Organic Alpaca", "Transport") => 0m, // Transport calculated dynamically
 
                 _ => 0m // Default value

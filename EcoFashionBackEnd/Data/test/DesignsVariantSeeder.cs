@@ -33,7 +33,7 @@ namespace EcoFashionBackEnd.Data.test
                             DesignId = design.DesignId,
                             SizeId = size.SizeId,
                             ColorCode = color,
-                            Quantity = random.Next(10, 100) // số lượng ngẫu nhiên
+                            Quantity = random.Next(10, 50) // số lượng ngẫu nhiên
                         });
                     }
                 }

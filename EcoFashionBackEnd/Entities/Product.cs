@@ -14,10 +14,6 @@ namespace EcoFashionBackEnd.Entities
         [ForeignKey(nameof(DesignId))]
         public virtual Design Design { get; set; }
 
-        public int? VariantId { get; set; }
-        [ForeignKey(nameof(VariantId))]
-        public virtual DesignsVariant Variant { get; set; }
-
         public int SizeId { get; set; }
         [ForeignKey(nameof(SizeId))]
         public virtual Size Size { get; set; }

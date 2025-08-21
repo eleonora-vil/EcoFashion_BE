@@ -4,5 +4,7 @@
     {
         public int SizeId { get; set; }
         public string ColorCode { get; set; }
+        public int Quantity { get; set; }
+
     }
 }

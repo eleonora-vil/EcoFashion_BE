@@ -44,6 +44,9 @@ namespace EcoFashionBackEnd.Entities
         public string? MerchantCode { get; set; }
         public string? ReturnPayload { get; set; }
         public string? IpnPayload { get; set; }
+        // Liên kết với WalletTransaction
+        public virtual ICollection<WalletTransaction> WalletTransactions { get; set; } = new List<WalletTransaction>();
     }
-
 }
+
+

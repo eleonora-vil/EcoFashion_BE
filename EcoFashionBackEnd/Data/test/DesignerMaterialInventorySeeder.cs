@@ -11,21 +11,24 @@ namespace EcoFashionBackEnd.Data.test
 
             var designer = await context.Designers.FirstOrDefaultAsync();
             var materials = await context.Materials.ToListAsync();
+            var materialWarehouse = await context.Warehouses
+                .FirstOrDefaultAsync(w => w.WarehouseType == "Material");
 
-            if (designer == null || materials.Count == 0) return;
+            if (designer == null || materials.Count == 0 || materialWarehouse == null) return;
 
             var random = new Random();
             var inventoryList = new List<DesignerMaterialInventory>();
 
             foreach (var material in materials)
             {
+                var quantity = random.Next(50, 201);
                 inventoryList.Add(new DesignerMaterialInventory
                 {
-                    DesignerId = designer.DesignerId,
+                    WarehouseId = materialWarehouse.WarehouseId, // Assign the correct WarehouseId
                     MaterialId = material.MaterialId,
-                    Quantity = random.Next(50, 201), // từ 50 đến 200 mét
-                    Cost = (decimal)(random.NextDouble() * 50 + 10), // từ 10.0 đến 60.0
-                    LastBuyDate = DateTime.UtcNow.AddDays(-random.Next(1, 90)), // trong 3 tháng gần nhất
+                    Quantity = quantity,
+                    Cost = (decimal)material.PricePerUnit * 1000 * quantity,
+                    LastBuyDate = DateTime.UtcNow.AddDays(-random.Next(600, 900)),
                     Status = "In Stock"
                 });
             }

@@ -10,16 +10,22 @@ namespace EcoFashionBackEnd.Services
         private readonly IRepository<Order, int> _orderRepository;
         private readonly IRepository<OrderDetail, int> _orderDetailRepository;
         private readonly IRepository<OrderGroup, Guid> _orderGroupRepository;
+        private readonly IRepository<Material, int> _materialRepository;
+        private readonly AppDbContext _dbContext;
 
         public CheckoutService(
             IRepository<Order, int> orderRepository,
             IRepository<OrderDetail, int> orderDetailRepository,
-            IRepository<OrderGroup, Guid> orderGroupRepository
+            IRepository<OrderGroup, Guid> orderGroupRepository,
+            IRepository<Material, int> materialRepository,
+            AppDbContext dbContext
         )
         {
             _orderRepository = orderRepository;
             _orderDetailRepository = orderDetailRepository;
             _orderGroupRepository = orderGroupRepository;
+            _materialRepository = materialRepository;
+            _dbContext = dbContext;
         }
 
         // Tạo OrderGroup + nhiều Order theo Seller, kèm OrderDetail
@@ -27,8 +33,24 @@ namespace EcoFashionBackEnd.Services
         {
             var expiresAt = DateTime.UtcNow.AddMinutes(request.HoldMinutes <= 0 ? 30 : request.HoldMinutes);
 
-            // Group items theo SellerId + SellerType
-            var groups = request.Items
+            // Server-derivation: xác định Seller theo dữ liệu gốc (Material/Design), không tin vào payload
+            var normalizedItems = new List<(string SellerType, Guid? SellerId, string ItemType, int? MaterialId, int? DesignId, int Quantity, decimal UnitPrice)>();
+            foreach (var i in request.Items)
+            {
+                if (i.ItemType.Equals("material", StringComparison.OrdinalIgnoreCase) && i.MaterialId.HasValue)
+                {
+                    var material = await _dbContext.Materials.AsNoTracking().FirstOrDefaultAsync(m => m.MaterialId == i.MaterialId.Value);
+                    if (material == null) throw new ArgumentException($"Material không tồn tại: {i.MaterialId}");
+                    normalizedItems.Add(("Supplier", material.SupplierId, "material", i.MaterialId, null, i.Quantity, material.PricePerUnit));
+                }
+                else if (i.ItemType.Equals("design", StringComparison.OrdinalIgnoreCase) && i.DesignId.HasValue)
+                {
+                    // Hiện chưa mở bán design; tạm để seller null
+                    normalizedItems.Add(("Designer", null, "design", null, i.DesignId, i.Quantity, i.UnitPrice));
+                }
+            }
+
+            var groups = normalizedItems
                 .GroupBy(i => new { i.SellerId, i.SellerType })
                 .ToList();
 
@@ -84,13 +106,13 @@ namespace EcoFashionBackEnd.Services
                     var detail = new OrderDetail
                     {
                         OrderId = order.OrderId,
-                        MaterialId = item.ItemType.Equals("material", StringComparison.OrdinalIgnoreCase) ? item.MaterialId : null,
-                        DesignId = item.ItemType.Equals("design", StringComparison.OrdinalIgnoreCase) ? item.DesignId : null,
-                        SupplierId = item.SellerType.Equals("Supplier", StringComparison.OrdinalIgnoreCase) ? item.SellerId : null,
-                        DesignerId = item.SellerType.Equals("Designer", StringComparison.OrdinalIgnoreCase) ? item.SellerId : null,
+                        MaterialId = item.ItemType == "material" ? item.MaterialId : null,
+                        DesignId = item.ItemType == "design" ? item.DesignId : null,
+                        SupplierId = item.SellerType == "Supplier" ? item.SellerId : null,
+                        DesignerId = item.SellerType == "Designer" ? item.SellerId : null,
                         Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice,
-                        Type = item.ItemType.Equals("material", StringComparison.OrdinalIgnoreCase) ? OrderDetailType.material : OrderDetailType.design,
+                        Type = item.ItemType == "material" ? OrderDetailType.material : OrderDetailType.design,
                         Status = OrderDetailStatus.pending
                     };
                     await _orderDetailRepository.AddAsync(detail);
@@ -117,6 +139,48 @@ namespace EcoFashionBackEnd.Services
             await _orderGroupRepository.Commit();
 
             return response;
+        }
+
+        // Tạo session trực tiếp từ cart của user
+        public async Task<CreateSessionResponse> CreateSessionFromCartAsync(int userId, string shippingAddress, int holdMinutes)
+        {
+            // Lấy cart active của user
+            var cart = await _dbContext.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.UserId == userId && c.IsActive);
+
+            if (cart == null || !cart.Items.Any())
+            {
+                throw new ArgumentException("Giỏ hàng trống hoặc không tồn tại.");
+            }
+
+            // Chuyển CartItem thành CreateSessionRequest format
+            var requestItems = new List<CartItemDto>();
+            foreach (var cartItem in cart.Items)
+            {
+                var material = await _materialRepository.GetByIdAsync(cartItem.MaterialId);
+                if (material == null)
+                {
+                    throw new InvalidOperationException($"Material với ID {cartItem.MaterialId} không tồn tại.");
+                }
+
+                requestItems.Add(new CartItemDto
+                {
+                    ItemType = "material",
+                    MaterialId = cartItem.MaterialId,
+                    Quantity = cartItem.Quantity,
+                    UnitPrice = material.PricePerUnit // Dùng giá hiện tại
+                });
+            }
+
+            var request = new CreateSessionRequest
+            {
+                Items = requestItems,
+                ShippingAddress = shippingAddress,
+                HoldMinutes = holdMinutes
+            };
+
+            return await CreateSessionAsync(userId, request);
         }
     }
 }

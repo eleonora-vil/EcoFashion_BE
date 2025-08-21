@@ -23,6 +23,7 @@ namespace EcoFashionBackEnd.Services
             _mapper = mapper;
             _appDbContext = dbContext;
         }
+        // Get material type by id
         public async Task<MaterialTypeModel?> GetMaterialTypeByIdAsync(int id)
         {
             var materialType = await _materialTypeRepository.GetByIdAsync(id);
@@ -30,22 +31,27 @@ namespace EcoFashionBackEnd.Services
                 return null;
             return _mapper.Map<MaterialTypeModel>(materialType);
         }
+        // Get all material types
         public async Task<IEnumerable<MaterialTypeModel>> GetAllMaterialTypesAsync()
         {
             var materialTypes = await _materialTypeRepository.GetAll()
                                       .ToListAsync();
             return _mapper.Map<List<MaterialTypeModel>>(materialTypes);
         }
+
+        // Create material type
         public async Task<MaterialTypeModel> CreateMaterialTypeAsync(MaterialTypeRequest request)
         {
             var materialType = new MaterialType
             {
-                TypeName = request.TypeName
+                TypeName = request.TypeName,
+                ImageUrl = "https://res.cloudinary.com/dguz8gz6s/image/upload/v1754826927/organic-coton_b9zo4y.webp"
             };
             await _materialTypeRepository.AddAsync(materialType);
             await _appDbContext.SaveChangesAsync();
             return _mapper.Map<MaterialTypeModel>(materialType);
         }
+        // Update material type
         public async Task<MaterialTypeModel?> UpdateMaterialTypeAsync(int id, MaterialTypeRequest model)
         {
             var materialType = await _materialTypeRepository.GetByIdAsync(id);
@@ -58,6 +64,7 @@ namespace EcoFashionBackEnd.Services
 
             return _mapper.Map<MaterialTypeModel>(materialType);
         }
+        // Delete material type
         public async Task<bool> DeleteMaterialTypeAsync(int id)
         {
             var materialType = await _materialTypeRepository.GetByIdAsync(id);

@@ -16,12 +16,12 @@ namespace EcoFashionBackEnd.Controllers
             _designTypeService = designTypeService;
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    var result = await _designTypeService.GetAllDesignTypesAsync();
-        //    return Ok(result);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _designTypeService.GetAllItemTypesAsync();
+            return Ok(result);
+        }
     }
 
 }

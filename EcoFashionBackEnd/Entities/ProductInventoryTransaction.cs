@@ -14,11 +14,12 @@ namespace EcoFashionBackEnd.Entities
         [ForeignKey(nameof(InventoryId))]
         public virtual ProductInventory ProductInventory { get; set; }
 
-        public int PerformedByUserId { get; set; }
+        public int? PerformedByUserId { get; set; }
         [ForeignKey(nameof(PerformedByUserId))]
         public virtual User User { get; set; } 
-        public int QuantityChanged { get; set; }  // Số lượng nhập (+) hoặc xuất (-)
-
+        public decimal QuantityChanged { get; set; }  // Số lượng nhập (+) hoặc xuất (-)
+        public decimal? BeforeQty { get; set; }
+        public decimal? AfterQty { get; set; }
         public DateTime TransactionDate { get; set; } = DateTime.UtcNow;
 
         public string TransactionType { get; set; }  // Ví dụ: "Sale", "Restock", "Adjustment", "Return"

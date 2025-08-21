@@ -62,8 +62,8 @@ namespace EcoFashionBackEnd.Services
                 {
                     // Quy đổi múi giờ VN để nhóm theo ngày địa phương
                     Date = t.CreatedAt.AddHours(7).Date,
-                    InQty = t.TransactionType == "SupplierReceipt" ? t.QuantityChange : 0,
-                    OutQty = t.TransactionType != "SupplierReceipt" ? t.QuantityChange : 0,
+                    InQty = t.TransactionType == MaterialTransactionType.SupplierReceipt ? t.QuantityChange : 0,
+                    OutQty = t.TransactionType != MaterialTransactionType.SupplierReceipt ? t.QuantityChange : 0,
                 })
                 .ToListAsync();
 
@@ -121,7 +121,7 @@ namespace EcoFashionBackEnd.Services
                         join w in _db.Warehouses on t.WarehouseId equals w.WarehouseId
                         join s in _db.Suppliers on w.SupplierId equals s.SupplierId into sgrp
                         from s in sgrp.DefaultIfEmpty()
-                        where t.TransactionType == "SupplierReceipt" && t.CreatedAt >= fromDate && t.CreatedAt <= toDate
+                        where t.TransactionType == MaterialTransactionType.SupplierReceipt && t.CreatedAt >= fromDate && t.CreatedAt <= toDate
                         select new { t.CreatedAt, t.QuantityChange, SupplierName = s != null ? s.SupplierName : null, t.MaterialId };
 
             if (materialId.HasValue)

@@ -12,5 +12,6 @@
         public double? Rating { get; set; }
         public int? ReviewCount { get; set; }
         public string? Certificates { get; set; }
+        public DateTime CreateAt { get; set; }
     }
 }
