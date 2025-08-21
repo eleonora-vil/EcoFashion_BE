@@ -1,4 +1,5 @@
 using EcoFashionBackEnd.Data;
+using EcoFashionBackEnd.Data.test;
 using EcoFashionBackEnd.Entities;
 using EcoFashionBackEnd.Extensions;
 using EcoFashionBackEnd.Middlewares;
@@ -14,7 +15,7 @@ public class Program
         // 1. Add custom services (DbContext, Auth, Mail, Cloudinary, Vnpay, Repository, etc.)
         builder.Services.AddInfrastructure(builder.Configuration);
 
-        // 2. Heroku / Railway PORT config
+        // 2. Railway PORT config
         var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
         builder.WebHost.UseUrls($"http://*:{port}");
 
