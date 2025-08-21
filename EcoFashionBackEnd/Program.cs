@@ -52,13 +52,19 @@ public class Program
         });
 
         // 5. CORS config
-        builder.Services.AddCors(option =>
-            option.AddPolicy("CORS", policy =>
-                policy.WithOrigins("http://localhost:5173", "http://localhost:5174")
-                      .AllowAnyMethod()
-                      .AllowAnyHeader()
-                      .AllowCredentials()));
-
+       builder.Services.AddCors(option =>
+    option.AddPolicy("CORS", policy =>
+        policy
+            .WithOrigins(
+                "http://localhost:5173",
+                "http://localhost:5174",
+                "https://ecofashionbackend.up.railway.app", // add BE domain
+                "https://eco-fashion-frontend.vercel.app>"               // add FE domain sau này
+            )
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+    ));
         // 6. JSON config
         builder.Services.AddControllers().AddJsonOptions(options =>
         {
