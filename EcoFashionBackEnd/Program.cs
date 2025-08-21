@@ -59,7 +59,7 @@ public class Program
                 "http://localhost:5173",
                 "http://localhost:5174",
                 "https://ecofashionbackend.up.railway.app", // add BE domain
-                "https://eco-fashion-frontend.vercel.app>"               // add FE domain sau này
+                "https://eco-fashion-frontend.vercel.app"               // add FE domain sau này
             )
             .AllowAnyMethod()
             .AllowAnyHeader()
