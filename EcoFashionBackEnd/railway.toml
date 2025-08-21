@@ -1,13 +1,10 @@
 # railway.toml
 [build]
 builder = "dockerfile"
-# Đường dẫn đến Dockerfile của bạn, tương đối so với gốc repository.
-# Vì thư mục Git gốc là 'EcoFashion_BE', và Dockerfile nằm trong 'EcoFashionBackEnd'
+
 dockerfilePath = "./EcoFashionBackEnd/Dockerfile"
 
 [deploy]
-# Lệnh khởi động ứng dụng sau khi triển khai.
-# Đây là tên của file thực thi được tạo ra từ dự án EcoFashionBackEnd.csproj.
 startCommand = "./EcoFashionBackEnd"
 restartPolicyType = "always"
 healthcheckPath = "/health" # Giữ nguyên nếu bạn có endpoint health check
