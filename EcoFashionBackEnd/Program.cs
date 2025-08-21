@@ -96,7 +96,18 @@ public class Program
                     await dbContext.Database.MigrateAsync();
                 }
             }
-
+              try
+            {
+                Console.WriteLine("Starting database initialization...");
+                // Phương thức này sẽ kích hoạt migration (nếu logic nằm trong đó)
+                await app.InitialiseDatabaseAsync(); 
+                Console.WriteLine("Database initialization completed successfully!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Database initialization failed: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+            }
 
             // app.UseHttpsRedirection();
             app.UseCors("CORS");
