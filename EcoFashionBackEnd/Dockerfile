@@ -10,6 +10,7 @@ RUN dotnet restore
 COPY . ./
 
 # Publish the application
+# Bỏ cờ --no-restore để đảm bảo publish cũng khôi phục gói
 RUN dotnet publish -c Release -o out
 
 # Stage 2: Create the runtime image
