@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace EcoFashionBackEnd.Migrations
 {
     /// <inheritdoc />
-    public partial class v1 : Migration
+    public partial class v : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,9 +16,9 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Image",
                 columns: table => new
                 {
-                    ImageId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImageId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ImageUrl = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,10 +29,10 @@ namespace EcoFashionBackEnd.Migrations
                 name: "ItemTypes",
                 columns: table => new
                 {
-                    ItemTypeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                    ItemTypeId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TypeName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,17 +43,17 @@ namespace EcoFashionBackEnd.Migrations
                 name: "MaterialTypes",
                 columns: table => new
                 {
-                    TypeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsOrganic = table.Column<bool>(type: "bit", nullable: false),
-                    IsRecycled = table.Column<bool>(type: "bit", nullable: false),
-                    SustainabilityNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    TypeId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TypeName = table.Column<string>(type: "text", nullable: true),
+                    ImageUrl = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Category = table.Column<string>(type: "text", nullable: true),
+                    IsOrganic = table.Column<bool>(type: "boolean", nullable: false),
+                    IsRecycled = table.Column<bool>(type: "boolean", nullable: false),
+                    SustainabilityNotes = table.Column<string>(type: "text", nullable: true),
+                    DisplayOrder = table.Column<int>(type: "integer", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,10 +64,10 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Sizes",
                 columns: table => new
                 {
-                    SizeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SizeName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SizeDescription = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                    SizeId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SizeName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    SizeDescription = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,15 +78,15 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Sustainability_Criteria",
                 columns: table => new
                 {
-                    CriterionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Weight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Thresholds = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false)
+                    CriterionId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Unit = table.Column<string>(type: "text", nullable: true),
+                    Weight = table.Column<decimal>(type: "numeric", nullable: false),
+                    Thresholds = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,10 +97,10 @@ namespace EcoFashionBackEnd.Migrations
                 name: "UserRole",
                 columns: table => new
                 {
-                    RoleId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    RoleId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoleName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -110,10 +111,10 @@ namespace EcoFashionBackEnd.Migrations
                 name: "ItemTypeSizeRatios",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemTypeId = table.Column<int>(type: "int", nullable: false),
-                    SizeId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ItemTypeId = table.Column<int>(type: "integer", nullable: false),
+                    SizeId = table.Column<int>(type: "integer", nullable: false),
                     Ratio = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
@@ -137,11 +138,11 @@ namespace EcoFashionBackEnd.Migrations
                 name: "MaterialTypeBenchmarks",
                 columns: table => new
                 {
-                    BenchmarkId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeId = table.Column<int>(type: "int", nullable: false),
-                    CriteriaId = table.Column<int>(type: "int", nullable: false),
-                    Value = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                    BenchmarkId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TypeId = table.Column<int>(type: "integer", nullable: false),
+                    CriteriaId = table.Column<int>(type: "integer", nullable: false),
+                    Value = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -164,19 +165,19 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Username = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    OTPCode = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
-                    OTPExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RoleId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UserId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    Phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
+                    Username = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false),
+                    FullName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    OTPCode = table.Column<string>(type: "character varying(6)", maxLength: 6, nullable: true),
+                    OTPExpiresAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    RoleId = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastUpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -193,31 +194,31 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Applications",
                 columns: table => new
                 {
-                    ApplicationId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    TargetRoleId = table.Column<int>(type: "int", nullable: false),
-                    AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PortfolioUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PortfolioFiles = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BannerUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpecializationUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SocialLinks = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationPictureFront = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationPictureBack = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsIdentificationVerified = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProcessedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ProcessedBy = table.Column<int>(type: "int", nullable: true),
-                    RejectionReason = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaxNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Certificates = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ApplicationId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    TargetRoleId = table.Column<int>(type: "integer", nullable: false),
+                    AvatarUrl = table.Column<string>(type: "text", nullable: true),
+                    PortfolioUrl = table.Column<string>(type: "text", nullable: true),
+                    PortfolioFiles = table.Column<string>(type: "text", nullable: true),
+                    BannerUrl = table.Column<string>(type: "text", nullable: true),
+                    SpecializationUrl = table.Column<string>(type: "text", nullable: true),
+                    Bio = table.Column<string>(type: "text", nullable: true),
+                    SocialLinks = table.Column<string>(type: "text", nullable: true),
+                    IdentificationNumber = table.Column<string>(type: "text", nullable: true),
+                    IdentificationPictureFront = table.Column<string>(type: "text", nullable: true),
+                    IdentificationPictureBack = table.Column<string>(type: "text", nullable: true),
+                    IsIdentificationVerified = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ProcessedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    ProcessedBy = table.Column<int>(type: "integer", nullable: true),
+                    RejectionReason = table.Column<string>(type: "text", nullable: true),
+                    Note = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    Address = table.Column<string>(type: "text", nullable: true),
+                    TaxNumber = table.Column<string>(type: "text", nullable: true),
+                    Certificates = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -240,13 +241,13 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Blogs",
                 columns: table => new
                 {
-                    BlogId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    BlogId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserID = table.Column<int>(type: "integer", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Content = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastUpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,14 +264,14 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Carts",
                 columns: table => new
                 {
-                    CartId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    SessionKey = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CartId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    SessionKey = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ExpiresAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -287,28 +288,28 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Designer",
                 columns: table => new
                 {
-                    DesignerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    DesignerName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpecializationUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PortfolioUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PortfolioFiles = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BannerUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaxNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationPictureFront = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationPictureBack = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Rating = table.Column<double>(type: "float", nullable: true),
-                    ReviewCount = table.Column<int>(type: "int", nullable: true),
-                    Certificates = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DesignerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    DesignerName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    AvatarUrl = table.Column<string>(type: "text", nullable: true),
+                    Bio = table.Column<string>(type: "text", nullable: true),
+                    SpecializationUrl = table.Column<string>(type: "text", nullable: true),
+                    PortfolioUrl = table.Column<string>(type: "text", nullable: true),
+                    PortfolioFiles = table.Column<string>(type: "text", nullable: true),
+                    BannerUrl = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    Address = table.Column<string>(type: "text", nullable: true),
+                    TaxNumber = table.Column<string>(type: "text", nullable: true),
+                    IdentificationNumber = table.Column<string>(type: "text", nullable: true),
+                    IdentificationPictureFront = table.Column<string>(type: "text", nullable: true),
+                    IdentificationPictureBack = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Rating = table.Column<double>(type: "double precision", nullable: true),
+                    ReviewCount = table.Column<int>(type: "integer", nullable: true),
+                    Certificates = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -325,17 +326,17 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Notifications",
                 columns: table => new
                 {
-                    NotificationId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IsRead = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReadAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RelatedId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    RelatedType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    NotificationId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    Title = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Message = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
+                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    IsRead = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ReadAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    RelatedId = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    RelatedType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -352,13 +353,13 @@ namespace EcoFashionBackEnd.Migrations
                 name: "OrderGroups",
                 columns: table => new
                 {
-                    OrderGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    TotalOrders = table.Column<int>(type: "int", nullable: false),
-                    CompletedOrders = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    OrderGroupId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    TotalOrders = table.Column<int>(type: "integer", nullable: false),
+                    CompletedOrders = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ExpiresAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -375,28 +376,28 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Supplier",
                 columns: table => new
                 {
-                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    SupplierName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpecializationUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PortfolioUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PortfolioFiles = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BannerUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaxNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationPictureFront = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdentificationPictureBack = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Rating = table.Column<double>(type: "float", nullable: true),
-                    ReviewCount = table.Column<int>(type: "int", nullable: true),
-                    Certificates = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SupplierId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    SupplierName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    AvatarUrl = table.Column<string>(type: "text", nullable: true),
+                    Bio = table.Column<string>(type: "text", nullable: true),
+                    SpecializationUrl = table.Column<string>(type: "text", nullable: true),
+                    PortfolioUrl = table.Column<string>(type: "text", nullable: true),
+                    PortfolioFiles = table.Column<string>(type: "text", nullable: true),
+                    BannerUrl = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    Address = table.Column<string>(type: "text", nullable: true),
+                    TaxNumber = table.Column<string>(type: "text", nullable: true),
+                    IdentificationNumber = table.Column<string>(type: "text", nullable: true),
+                    IdentificationPictureFront = table.Column<string>(type: "text", nullable: true),
+                    IdentificationPictureBack = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Rating = table.Column<double>(type: "double precision", nullable: true),
+                    ReviewCount = table.Column<int>(type: "integer", nullable: true),
+                    Certificates = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -413,13 +414,13 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Wallets",
                 columns: table => new
                 {
-                    WalletId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Balance = table.Column<double>(type: "float", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    WalletId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    Balance = table.Column<double>(type: "double precision", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastUpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -436,10 +437,10 @@ namespace EcoFashionBackEnd.Migrations
                 name: "BlogImages",
                 columns: table => new
                 {
-                    BlogImageId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BlogId = table.Column<int>(type: "int", nullable: false),
-                    ImageId = table.Column<int>(type: "int", nullable: false)
+                    BlogImageId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    BlogId = table.Column<int>(type: "integer", nullable: false),
+                    ImageId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -462,14 +463,14 @@ namespace EcoFashionBackEnd.Migrations
                 name: "CartItems",
                 columns: table => new
                 {
-                    CartItemId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CartId = table.Column<int>(type: "int", nullable: false),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    UnitPriceSnapshot = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    AddedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CartItemId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CartId = table.Column<int>(type: "integer", nullable: false),
+                    MaterialId = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    UnitPriceSnapshot = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    AddedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -486,23 +487,23 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Designs",
                 columns: table => new
                 {
-                    DesignId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DesignId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DesignerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     RecycledPercentage = table.Column<float>(type: "real", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    SalePrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    ProductScore = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ItemTypeId = table.Column<int>(type: "int", nullable: true),
+                    UnitPrice = table.Column<decimal>(type: "numeric", nullable: true),
+                    SalePrice = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: true),
+                    ProductScore = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ItemTypeId = table.Column<int>(type: "integer", nullable: true),
                     CarbonFootprint = table.Column<float>(type: "real", nullable: true),
                     WaterUsage = table.Column<float>(type: "real", nullable: true),
                     WasteDiverted = table.Column<float>(type: "real", nullable: true),
                     LaborHours = table.Column<float>(type: "real", nullable: true),
-                    LaborCostPerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    CareInstruction = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                    LaborCostPerHour = table.Column<decimal>(type: "numeric", nullable: true),
+                    CareInstruction = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -525,15 +526,15 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Warehouses",
                 columns: table => new
                 {
-                    WarehouseId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    WarehouseType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DesignerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDefault = table.Column<bool>(type: "bit", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    WarehouseId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    WarehouseType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    SupplierId = table.Column<Guid>(type: "uuid", nullable: true),
+                    DesignerId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsDefault = table.Column<bool>(type: "boolean", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -549,27 +550,27 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    OrderGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ShippingAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Subtotal = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    ShippingFee = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FulfillmentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CommissionRate = table.Column<decimal>(type: "decimal(5,4)", precision: 5, scale: 4, nullable: true),
-                    CommissionAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    NetAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    SellerType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SellerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsPaidOut = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    ExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    OrderId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    OrderGroupId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ShippingAddress = table.Column<string>(type: "text", nullable: false),
+                    Subtotal = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    ShippingFee = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    Discount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    PaymentStatus = table.Column<string>(type: "text", nullable: false),
+                    FulfillmentStatus = table.Column<string>(type: "text", nullable: false),
+                    CommissionRate = table.Column<decimal>(type: "numeric(5,4)", precision: 5, scale: 4, nullable: true),
+                    CommissionAmount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: true),
+                    NetAmount = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: true),
+                    SellerType = table.Column<string>(type: "text", nullable: true),
+                    SellerId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsPaidOut = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    ExpiresAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    OrderDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -592,34 +593,34 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Materials",
                 columns: table => new
                 {
-                    MaterialId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TypeId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RecycledPercentage = table.Column<decimal>(type: "decimal(5,2)", precision: 5, scale: 2, nullable: false),
-                    QuantityAvailable = table.Column<int>(type: "int", nullable: false),
-                    PricePerUnit = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    DocumentationUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CarbonFootprint = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    CarbonFootprintUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WaterUsage = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    WaterUsageUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WasteDiverted = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    WasteDivertedUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductionCountry = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductionRegion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ManufacturingProcess = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CertificationDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CertificationExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TransportDistance = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    TransportMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApprovalStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AdminNote = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    MaterialId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SupplierId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TypeId = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    RecycledPercentage = table.Column<decimal>(type: "numeric(5,2)", precision: 5, scale: 2, nullable: false),
+                    QuantityAvailable = table.Column<int>(type: "integer", nullable: false),
+                    PricePerUnit = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    DocumentationUrl = table.Column<string>(type: "text", nullable: true),
+                    CarbonFootprint = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
+                    CarbonFootprintUnit = table.Column<string>(type: "text", nullable: true),
+                    WaterUsage = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
+                    WaterUsageUnit = table.Column<string>(type: "text", nullable: true),
+                    WasteDiverted = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
+                    WasteDivertedUnit = table.Column<string>(type: "text", nullable: true),
+                    ProductionCountry = table.Column<string>(type: "text", nullable: true),
+                    ProductionRegion = table.Column<string>(type: "text", nullable: true),
+                    ManufacturingProcess = table.Column<string>(type: "text", nullable: true),
+                    CertificationDetails = table.Column<string>(type: "text", nullable: true),
+                    CertificationExpiryDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    TransportDistance = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
+                    TransportMethod = table.Column<string>(type: "text", nullable: true),
+                    ApprovalStatus = table.Column<string>(type: "text", nullable: true),
+                    AdminNote = table.Column<string>(type: "text", nullable: true),
+                    IsAvailable = table.Column<bool>(type: "boolean", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -642,9 +643,9 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Saved_Supplier",
                 columns: table => new
                 {
-                    SavedSupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DesignerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    SavedSupplierId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DesignerId = table.Column<Guid>(type: "uuid", nullable: true),
+                    SupplierId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -667,13 +668,13 @@ namespace EcoFashionBackEnd.Migrations
                 name: "DesignFeatures",
                 columns: table => new
                 {
-                    FeatureId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignId = table.Column<int>(type: "int", nullable: false),
-                    ReduceWaste = table.Column<bool>(type: "bit", nullable: false),
-                    LowImpactDyes = table.Column<bool>(type: "bit", nullable: false),
-                    Durable = table.Column<bool>(type: "bit", nullable: false),
-                    EthicallyManufactured = table.Column<bool>(type: "bit", nullable: false)
+                    FeatureId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DesignId = table.Column<int>(type: "integer", nullable: false),
+                    ReduceWaste = table.Column<bool>(type: "boolean", nullable: false),
+                    LowImpactDyes = table.Column<bool>(type: "boolean", nullable: false),
+                    Durable = table.Column<bool>(type: "boolean", nullable: false),
+                    EthicallyManufactured = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -690,10 +691,10 @@ namespace EcoFashionBackEnd.Migrations
                 name: "DesignImages",
                 columns: table => new
                 {
-                    DesignImageId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignId = table.Column<int>(type: "int", nullable: false),
-                    ImageId = table.Column<int>(type: "int", nullable: false)
+                    DesignImageId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DesignId = table.Column<int>(type: "integer", nullable: false),
+                    ImageId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -716,12 +717,12 @@ namespace EcoFashionBackEnd.Migrations
                 name: "DesignsVariants",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignId = table.Column<int>(type: "int", nullable: false),
-                    SizeId = table.Column<int>(type: "int", nullable: false),
-                    ColorCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DesignId = table.Column<int>(type: "integer", nullable: false),
+                    SizeId = table.Column<int>(type: "integer", nullable: false),
+                    ColorCode = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -744,10 +745,10 @@ namespace EcoFashionBackEnd.Migrations
                 name: "DraftSketches",
                 columns: table => new
                 {
-                    SketchImageId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignId = table.Column<int>(type: "int", nullable: false),
-                    ImageId = table.Column<int>(type: "int", nullable: false)
+                    SketchImageId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DesignId = table.Column<int>(type: "integer", nullable: false),
+                    ImageId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -770,13 +771,13 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignId = table.Column<int>(type: "int", nullable: false),
-                    SizeId = table.Column<int>(type: "int", nullable: false),
-                    ColorCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SKU = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                    ProductId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DesignId = table.Column<int>(type: "integer", nullable: false),
+                    SizeId = table.Column<int>(type: "integer", nullable: false),
+                    ColorCode = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    SKU = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Price = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -799,26 +800,26 @@ namespace EcoFashionBackEnd.Migrations
                 name: "PaymentTransactions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    VnPayTransactionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VnPayResponseCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrderId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    VnPayTransactionId = table.Column<string>(type: "text", nullable: true),
+                    VnPayResponseCode = table.Column<string>(type: "text", nullable: true),
                     Amount = table.Column<long>(type: "bigint", nullable: false),
-                    BankCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CardType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrderType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PaidAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TxnRef = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    PayUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Provider = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MerchantCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReturnPayload = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IpnPayload = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    BankCode = table.Column<string>(type: "text", nullable: true),
+                    CardType = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<string>(type: "text", nullable: true),
+                    Message = table.Column<string>(type: "text", nullable: true),
+                    OrderType = table.Column<string>(type: "text", nullable: true),
+                    PaymentType = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    PaidAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    TxnRef = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    PayUrl = table.Column<string>(type: "text", nullable: true),
+                    Provider = table.Column<string>(type: "text", nullable: true),
+                    MerchantCode = table.Column<string>(type: "text", nullable: true),
+                    ReturnPayload = table.Column<string>(type: "text", nullable: true),
+                    IpnPayload = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -841,14 +842,14 @@ namespace EcoFashionBackEnd.Migrations
                 name: "DesignerMaterialInventories",
                 columns: table => new
                 {
-                    InventoryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    WarehouseId = table.Column<int>(type: "int", nullable: false),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Cost = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    LastBuyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    InventoryId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    WarehouseId = table.Column<int>(type: "integer", nullable: false),
+                    MaterialId = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: true),
+                    Cost = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: true),
+                    LastBuyDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -871,9 +872,9 @@ namespace EcoFashionBackEnd.Migrations
                 name: "DesignsMaterials",
                 columns: table => new
                 {
-                    DesignId = table.Column<int>(type: "int", nullable: false),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    MeterUsed = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
+                    DesignId = table.Column<int>(type: "integer", nullable: false),
+                    MaterialId = table.Column<int>(type: "integer", nullable: false),
+                    MeterUsed = table.Column<decimal>(type: "numeric(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -896,15 +897,15 @@ namespace EcoFashionBackEnd.Migrations
                 name: "DraftParts",
                 columns: table => new
                 {
-                    PartId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Length = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Width = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    MaterialStatus = table.Column<int>(type: "int", nullable: false)
+                    PartId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DesignId = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Length = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
+                    Width = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    MaterialId = table.Column<int>(type: "integer", nullable: false),
+                    MaterialStatus = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -927,10 +928,10 @@ namespace EcoFashionBackEnd.Migrations
                 name: "MaterialImages",
                 columns: table => new
                 {
-                    MaterialImageId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    ImageId = table.Column<int>(type: "int", nullable: false)
+                    MaterialImageId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    MaterialId = table.Column<int>(type: "integer", nullable: false),
+                    ImageId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -953,14 +954,14 @@ namespace EcoFashionBackEnd.Migrations
                 name: "MaterialStocks",
                 columns: table => new
                 {
-                    StockId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    WarehouseId = table.Column<int>(type: "int", nullable: false),
-                    QuantityOnHand = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    MinThreshold = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    StockId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    MaterialId = table.Column<int>(type: "integer", nullable: false),
+                    WarehouseId = table.Column<int>(type: "integer", nullable: false),
+                    QuantityOnHand = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    MinThreshold = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Note = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -983,20 +984,20 @@ namespace EcoFashionBackEnd.Migrations
                 name: "MaterialStockTransactions",
                 columns: table => new
                 {
-                    TransactionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    WarehouseId = table.Column<int>(type: "int", nullable: false),
-                    TransactionType = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    QuantityChange = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    BeforeQty = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    AfterQty = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReferenceType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ReferenceId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TransactionId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    MaterialId = table.Column<int>(type: "integer", nullable: false),
+                    WarehouseId = table.Column<int>(type: "integer", nullable: false),
+                    TransactionType = table.Column<int>(type: "integer", maxLength: 50, nullable: false),
+                    QuantityChange = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    BeforeQty = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    AfterQty = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    Unit = table.Column<string>(type: "text", nullable: true),
+                    ReferenceType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    ReferenceId = table.Column<string>(type: "text", nullable: true),
+                    Note = table.Column<string>(type: "text", nullable: true),
+                    CreatedByUserId = table.Column<int>(type: "integer", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1019,9 +1020,9 @@ namespace EcoFashionBackEnd.Migrations
                 name: "MaterialSustainabilitys",
                 columns: table => new
                 {
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    CriterionId = table.Column<int>(type: "int", nullable: false),
-                    Value = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                    MaterialId = table.Column<int>(type: "integer", nullable: false),
+                    CriterionId = table.Column<int>(type: "integer", nullable: false),
+                    Value = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1044,18 +1045,18 @@ namespace EcoFashionBackEnd.Migrations
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    OrderDetailId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    DesignId = table.Column<int>(type: "int", nullable: true),
-                    DesignerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    MaterialId = table.Column<int>(type: "int", nullable: true),
-                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderId1 = table.Column<int>(type: "int", nullable: true)
+                    OrderDetailId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    OrderId = table.Column<int>(type: "integer", nullable: false),
+                    DesignId = table.Column<int>(type: "integer", nullable: true),
+                    DesignerId = table.Column<Guid>(type: "uuid", nullable: true),
+                    MaterialId = table.Column<int>(type: "integer", nullable: true),
+                    SupplierId = table.Column<Guid>(type: "uuid", nullable: true),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    Type = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    OrderId1 = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1101,12 +1102,12 @@ namespace EcoFashionBackEnd.Migrations
                 name: "ProductInventories",
                 columns: table => new
                 {
-                    InventoryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    WarehouseId = table.Column<int>(type: "int", nullable: false),
-                    QuantityAvailable = table.Column<int>(type: "int", nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InventoryId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ProductId = table.Column<int>(type: "integer", nullable: false),
+                    WarehouseId = table.Column<int>(type: "integer", nullable: false),
+                    QuantityAvailable = table.Column<int>(type: "integer", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1129,13 +1130,13 @@ namespace EcoFashionBackEnd.Migrations
                 name: "Reviews",
                 columns: table => new
                 {
-                    ReviewId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
-                    MaterialId = table.Column<int>(type: "int", nullable: true),
-                    Comment = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    RatingScore = table.Column<decimal>(type: "decimal(2,1)", precision: 2, scale: 1, nullable: false)
+                    ReviewId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    ProductId = table.Column<int>(type: "integer", nullable: true),
+                    MaterialId = table.Column<int>(type: "integer", nullable: true),
+                    Comment = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
+                    RatingScore = table.Column<decimal>(type: "numeric(2,1)", precision: 2, scale: 1, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1164,17 +1165,17 @@ namespace EcoFashionBackEnd.Migrations
                 name: "WalletTransactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    WalletId = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<double>(type: "float", nullable: false),
-                    BalanceBefore = table.Column<double>(type: "float", nullable: false),
-                    BalanceAfter = table.Column<double>(type: "float", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PaymentTransactionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    WalletId = table.Column<int>(type: "integer", nullable: false),
+                    Amount = table.Column<double>(type: "double precision", nullable: false),
+                    BalanceBefore = table.Column<double>(type: "double precision", nullable: false),
+                    BalanceAfter = table.Column<double>(type: "double precision", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<int>(type: "integer", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    PaymentTransactionId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1196,22 +1197,22 @@ namespace EcoFashionBackEnd.Migrations
                 name: "MaterialInventoryTransactions",
                 columns: table => new
                 {
-                    TransactionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InventoryId = table.Column<int>(type: "int", nullable: false),
-                    PerformedByUserId = table.Column<int>(type: "int", nullable: true),
-                    QuantityChanged = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BeforeQty = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    AfterQty = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    TransactionType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TransactionId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    InventoryId = table.Column<int>(type: "integer", nullable: false),
+                    PerformedByUserId = table.Column<int>(type: "integer", nullable: true),
+                    QuantityChanged = table.Column<decimal>(type: "numeric", nullable: false),
+                    BeforeQty = table.Column<decimal>(type: "numeric", nullable: true),
+                    AfterQty = table.Column<decimal>(type: "numeric", nullable: true),
+                    TransactionType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
+                    TransactionDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MaterialInventoryTransactions", x => x.TransactionId);
                     table.ForeignKey(
-                        name: "FK_MaterialInventoryTransactions_DesignerMaterialInventories_InventoryId",
+                        name: "FK_MaterialInventoryTransactions_DesignerMaterialInventories_I~",
                         column: x => x.InventoryId,
                         principalTable: "DesignerMaterialInventories",
                         principalColumn: "InventoryId",
@@ -1228,16 +1229,16 @@ namespace EcoFashionBackEnd.Migrations
                 name: "ProductInventoryTransactions",
                 columns: table => new
                 {
-                    TransactionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InventoryId = table.Column<int>(type: "int", nullable: false),
-                    PerformedByUserId = table.Column<int>(type: "int", nullable: true),
-                    QuantityChanged = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BeforeQty = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    AfterQty = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TransactionType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                    TransactionId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    InventoryId = table.Column<int>(type: "integer", nullable: false),
+                    PerformedByUserId = table.Column<int>(type: "integer", nullable: true),
+                    QuantityChanged = table.Column<decimal>(type: "numeric", nullable: false),
+                    BeforeQty = table.Column<decimal>(type: "numeric", nullable: true),
+                    AfterQty = table.Column<decimal>(type: "numeric", nullable: true),
+                    TransactionDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    TransactionType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1292,8 +1293,7 @@ namespace EcoFashionBackEnd.Migrations
                 name: "IX_Carts_UserId_IsActive",
                 table: "Carts",
                 columns: new[] { "UserId", "IsActive" },
-                unique: true,
-                filter: "[UserId] IS NOT NULL AND [IsActive] = 1");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Designer_UserId",
@@ -1508,8 +1508,7 @@ namespace EcoFashionBackEnd.Migrations
                 name: "IX_PaymentTransactions_TxnRef",
                 table: "PaymentTransactions",
                 column: "TxnRef",
-                unique: true,
-                filter: "[TxnRef] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PaymentTransactions_UserId",

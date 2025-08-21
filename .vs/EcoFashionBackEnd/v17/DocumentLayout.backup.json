@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\services\\orderpayoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\services\\orderpayoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\migrations\\20250821102415_v.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\migrations\\20250821102415_v.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\extensions\\servicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\extensions\\servicesextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\dtos\\wallet\\nested dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\dtos\\wallet\\nested dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\entities\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\entities\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\entities\\ordergroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\entities\\ordergroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\entities\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\entities\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\migrations\\20250821033508_v1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\migrations\\20250821033508_v1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|d:\\az\\deploy\\ecofashion\\ecofashionbackend\\ecofashion_be\\ecofashionbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5CF53F9F-7A99-4D0F-BD67-7CB2740651BE}|EcoFashionBackEnd\\EcoFashionBackEnd.csproj|solutionrelative:ecofashionbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -78,76 +78,77 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OrderGroup.cs",
-              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Entities\\OrderGroup.cs",
-              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Entities\\OrderGroup.cs",
-              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Entities\\OrderGroup.cs",
-              "RelativeToolTip": "EcoFashionBackEnd\\Entities\\OrderGroup.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:41:44.265Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "nested DTO.cs",
-              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Dtos\\Wallet\\nested DTO.cs",
-              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Dtos\\Wallet\\nested DTO.cs",
-              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Dtos\\Wallet\\nested DTO.cs",
-              "RelativeToolTip": "EcoFashionBackEnd\\Dtos\\Wallet\\nested DTO.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAxwBMAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:44:53.897Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Controllers\\OrderController.cs",
-              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "EcoFashionBackEnd\\Controllers\\OrderController.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAuwIEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:41:50.979Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "OrderService.cs",
-              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Services\\OrderService.cs",
-              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Services\\OrderService.cs",
-              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Services\\OrderService.cs",
-              "RelativeToolTip": "EcoFashionBackEnd\\Services\\OrderService.cs",
-              "ViewState": "AgIAAEwBAAAAAAAAAAASwFYBAAAAAAAAAAAAAA==",
+              "Title": "20250821102415_v.cs",
+              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Migrations\\20250821102415_v.cs",
+              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Migrations\\20250821102415_v.cs",
+              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Migrations\\20250821102415_v.cs",
+              "RelativeToolTip": "EcoFashionBackEnd\\Migrations\\20250821102415_v.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:41:07.933Z"
+              "WhenOpened": "2025-08-21T10:24:15.562Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Image.cs",
+              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Entities\\Image.cs",
+              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Entities\\Image.cs",
+              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Entities\\Image.cs",
+              "RelativeToolTip": "EcoFashionBackEnd\\Entities\\Image.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T10:17:12.028Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "20250821033508_v1.cs",
-              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Migrations\\20250821033508_v1.cs",
-              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Migrations\\20250821033508_v1.cs",
-              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Migrations\\20250821033508_v1.cs",
-              "RelativeToolTip": "EcoFashionBackEnd\\Migrations\\20250821033508_v1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\appsettings.json",
+              "RelativeDocumentMoniker": "EcoFashionBackEnd\\appsettings.json",
+              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\appsettings.json",
+              "RelativeToolTip": "EcoFashionBackEnd\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-21T09:30:09.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ServicesExtensions.cs",
+              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Extensions\\ServicesExtensions.cs",
+              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Extensions\\ServicesExtensions.cs",
+              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Extensions\\ServicesExtensions.cs",
+              "RelativeToolTip": "EcoFashionBackEnd\\Extensions\\ServicesExtensions.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAqwEkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:35:09.105Z"
+              "WhenOpened": "2025-08-21T09:28:29.477Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "OrderPayoutService.cs",
-              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Services\\OrderPayoutService.cs",
-              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Services\\OrderPayoutService.cs",
-              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Services\\OrderPayoutService.cs",
-              "RelativeToolTip": "EcoFashionBackEnd\\Services\\OrderPayoutService.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAIwBUAAABbAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Program.cs",
+              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Program.cs",
+              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Program.cs",
+              "RelativeToolTip": "EcoFashionBackEnd\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:24:34.011Z",
+              "WhenOpened": "2025-08-21T09:25:25.291Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Entities\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "EcoFashionBackEnd\\Entities\\AppDbContext.cs",
+              "ToolTip": "D:\\AZ\\DEPLOY\\EcoFashion\\EcoFashionBackEnd\\EcoFashion_BE\\EcoFashionBackEnd\\Entities\\AppDbContext.cs",
+              "RelativeToolTip": "EcoFashionBackEnd\\Entities\\AppDbContext.cs",
+              "ViewState": "AgIAAGsCAAAAAAAAAAAAAH4CAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T09:25:16.705Z"
             }
           ]
         },

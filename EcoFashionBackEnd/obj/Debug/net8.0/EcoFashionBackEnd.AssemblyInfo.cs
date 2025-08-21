@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EcoFashionBackEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+127faa281394f70c70a858340aface6a0e20dd75")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e9b5325118e1b2b9c5d2d2bd158f3c01f5be02b")]
 [assembly: System.Reflection.AssemblyProductAttribute("EcoFashionBackEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EcoFashionBackEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

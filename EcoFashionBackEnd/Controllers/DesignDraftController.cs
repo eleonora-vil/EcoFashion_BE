@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure;
 using EcoFashionBackEnd.Common;
 using EcoFashionBackEnd.Common.Payloads.Requests;
 using EcoFashionBackEnd.Common.Payloads.Requests.DessignDraft;

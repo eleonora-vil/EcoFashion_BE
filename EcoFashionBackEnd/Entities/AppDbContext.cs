@@ -636,7 +636,6 @@ namespace EcoFashionBackEnd.Entities
                       .HasForeignKey(c => c.UserId)
                       .OnDelete(DeleteBehavior.Restrict);
                 entity.HasIndex(c => new { c.UserId, c.IsActive })
-                      .HasFilter("[UserId] IS NOT NULL AND [IsActive] = 1")
                       .IsUnique();
                 entity.Property(c => c.CreatedAt);
                 entity.Property(c => c.UpdatedAt);

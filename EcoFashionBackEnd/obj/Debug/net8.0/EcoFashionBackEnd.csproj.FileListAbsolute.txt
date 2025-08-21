@@ -318,8 +318,6 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\EcoFashionBackEnd.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\EcoFashionBackEnd.pdb
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\AutoMapper.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Azure.Core.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Azure.Identity.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\CloudinaryDotNet.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\FluentValidation.dll
@@ -343,7 +341,6 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Data.Sqlite.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.DiaSymReader.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.DotNet.Scaffolding.Shared.dll
@@ -352,7 +349,6 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Sqlite.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
@@ -363,8 +359,6 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Identity.Client.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
@@ -373,7 +367,6 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.NET.StringTools.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.OpenApi.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\dotnet-aspnet-codegenerator-design.dll
@@ -399,7 +392,6 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.ClientModel.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.CodeDom.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Composition.AttributedModel.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Composition.Convention.dll
@@ -411,9 +403,7 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.IO.Pipelines.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Memory.Data.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Reflection.MetadataLoadContext.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Runtime.Caching.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\System.Text.Encodings.Web.dll
@@ -570,12 +560,6 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\browser-wasm\nativeassets\net8.0\e_sqlite3.a
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\linux-arm\native\libe_sqlite3.so
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\linux-arm64\native\libe_sqlite3.so
@@ -597,7 +581,6 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win-arm64\native\e_sqlite3.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
-D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\obj\Debug\net8.0\EcoFashionBackEnd.csproj.AssemblyReference.cache
@@ -622,3 +605,5 @@ D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\obj\De
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\obj\Debug\net8.0\EcoFashionBackEnd.pdb
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\obj\Debug\net8.0\EcoFashionBackEnd.genruntimeconfig.cache
 D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\obj\Debug\net8.0\ref\EcoFashionBackEnd.dll
+D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Npgsql.dll
+D:\AZ\DEPLOY\EcoFashion\EcoFashionBackEnd\EcoFashion_BE\EcoFashionBackEnd\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

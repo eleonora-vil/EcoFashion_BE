@@ -37,7 +37,7 @@ public static class ServicesExtensions
         services.AddSingleton(mapper);
 
         //Set time
-        //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
         var jwtSettings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
         services.Configure<JwtSettings>(val =>
@@ -70,7 +70,7 @@ public static class ServicesExtensions
 
         services.AddDbContext<AppDbContext>(opt =>
         {
-            opt.UseSqlServer(configuration.GetConnectionString("SqlDbConnection"));
+            opt.UseNpgsql(configuration.GetConnectionString("PgDbConnection"));
         });
 
         services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
